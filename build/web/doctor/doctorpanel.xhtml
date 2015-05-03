@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"      
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>Dentinium</title>
+    </h:head>
+    <h:body>
+
+        <br />
+
+        <h:outputLabel value ="Welcome: DR. #{DoctorPanel.name}"></h:outputLabel>
+        <br />
+        <h:form id="form2">
+            <p:growl id="msgs" showDetail="true" />
+
+            <p:button value="Create Reservation"  outcome="createreservation.xhtml" icon="ui-icon-star"  />
+
+  
+        <p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
+
+        </p:dialog>
+    </h:form>
+        <br />
+
+        <h:form id="form">
+
+            <p:carousel value="#{DoctorPanel.reservationList}" headerText="Appointments" var="reservation" itemStyleClass="carItem">
+                <h:panelGrid columns="2" style="width:100%" cellpadding="5" columnClasses="label,value">
+                    <f:facet name="header">
+
+                    </f:facet>
+
+                    <h:outputText value="Room Number" />
+                    <h:outputText value="#{reservation.room}" />
+
+                    <h:outputText value="Date" />
+                    <h:outputText value="#{reservation.date}" />
+
+                    <h:outputText value="Patient Name" />
+                    <h:outputText value="#{reservation.customerName}"/>
+
+                    <h:outputText value="Type" />
+                    <h:outputText value="#{reservation.type}" />
+
+                    <h:outputText value="Cost" />
+                    <h:outputText value="#{reservation.cost}" />
+
+                    <h:commandButton value="Cancel" actionListener="#{DoctorPanel.deleteReservationDate(reservation.reservationID)}"> </h:commandButton>
+                </h:panelGrid>
+
+                <f:facet name="footer">
+
+                </f:facet>
+            </p:carousel>
+        </h:form>
+        <br/>
+    </h:body>
+</html>

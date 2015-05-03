@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <style>
+            .ui-widget-header .ui-inputfield, .ui-widget-content .ui-inputfield{
+                background: whitesmoke;
+                -moz-box-shadow: inset 0 2px 2px #8f8f8f;
+                -webkit-box-shadow: inset 0 2px 2px #8f8f8f;
+                box-shadow: inset 0 2px 2px #8f8f8f;
+                color: darkslategray;
+            }
+        </style>
+    </h:head>
+    <h:body>
+
+        <h:form>
+    <p:growl id="msgs" showDetail="true" />
+ 
+    <p:panel header="Make an Appointment" style="margin-bottom:10px;">
+        <h:panelGrid columns="2" cellpadding="5">
+            <p:outputLabel for="company" value="Company " />
+            <p:selectOneMenu id="company" value="#{AppointmentBean.company}" style="width:250px">
+                <p:ajax listener="#{AppointmentBean.onCompanyChange}" update="doctor" />
+                <f:selectItem itemLabel="Any Hospital" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{AppointmentBean.companies}" />
+            </p:selectOneMenu>
+ 
+            <p:outputLabel for="doctor" value="Doctor: " />
+            <p:selectOneMenu id="doctor" value="#{AppointmentBean.doctor}" style="width:250px">
+                <p:ajax listener="#{AppointmentBean.onDoctorChange}" update="reservationDate" />
+                <f:selectItem itemLabel="Anyone" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{AppointmentBean.doctors}" />
+            </p:selectOneMenu>
+            
+            <p:outputLabel for="treatment" value="Treatment: " />
+            <p:selectOneMenu id="treatment" value="#{AppointmentBean.treatment}" style="width:250px">
+                <f:selectItem itemLabel="Select Treatment" itemValue="" noSelectionOption="false" />
+                <f:selectItems value="#{AppointmentBean.treatments}" />
+            </p:selectOneMenu>
+            
+             <p:outputLabel for="reservationDate" value="Appointment Date: " />
+             <p:selectOneMenu id="reservationDate" value="#{AppointmentBean.reservationID}" style="width:250px">
+                <f:selectItem itemLabel="Select Date" itemValue="" noSelectionOption="false" />
+                <f:selectItems value="#{AppointmentBean.reservationDates}" />
+            </p:selectOneMenu>
+            
+            
+        </h:panelGrid>
+ 
+        <p:separator />
+ 
+        <p:commandButton value="Submit" update="msgs" actionListener="#{AppointmentBean.makeAppointment}" icon="ui-icon-check" />
+    </p:panel>
+</h:form>
+        
+        
+    </h:body>
+</html>
+
+
+

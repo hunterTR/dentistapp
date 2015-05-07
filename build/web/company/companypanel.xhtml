@@ -18,7 +18,8 @@
     <h:body>
 
         <br />
-
+        <div style = "background-color:#666666">
+       
         <h:outputLabel value ="#{CompanyPanel.companyName}"></h:outputLabel>
         <br />
 
@@ -56,6 +57,7 @@
                     <h:outputText value="#{doctor.wage} TL"/>
 
                     <h:commandButton value="Delete" actionListener="#{CompanyPanel.deleteDoctor(doctor.doctorID)}"> </h:commandButton>
+                    
                 </h:panelGrid>
 
                 <f:facet name="footer">
@@ -63,7 +65,7 @@
                 </f:facet>
             </p:carousel>
         </h:form>
-
+ </div>
         <br />  
 
 
@@ -93,6 +95,8 @@
                     <h:outputText value="#{reservation.cost} TL" />
 
                     <h:commandButton value="Cancel" actionListener="#{CompanyPanel.deleteReservation(reservation.reservationID)}"> </h:commandButton>
+                    <h:commandButton value="Done" actionListener="#{CompanyPanel.deleteDoctor(doctor.doctorID)}"> </h:commandButton>
+                    <h:commandButton value="Didn't Come " actionListener="#{CompanyPanel.deleteDoctor(doctor.doctorID)}"> </h:commandButton>
                 </h:panelGrid>
 
                 <f:facet name="footer">

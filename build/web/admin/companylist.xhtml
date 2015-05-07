@@ -22,19 +22,26 @@
         <h:outputLabel value ="#{AdminPanel.name}"></h:outputLabel>
         <br />
 
-        <h:form id="form">
-            <p:growl id="msgs" showDetail="true" />
-
-            <p:button value="Add Company"  outcome="addcompany.xhtml" icon="ui-icon-star"  />
-            <p:button value="Company List"  outcome="companylist.xhtml" icon="ui-icon-star"  />
-            <p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
-
-            </p:dialog>
-        </h:form>
-
-        <br />  
 
 
+        <p:dataTable var="com" value="#{AdminPanel.companiesList}">
+            <p:column headerText="Id">
+                <h:outputText value="#{com.companyID}" />
+            </p:column>
+
+            <p:column headerText="Company Name">
+                <h:outputText value="#{com.companyName}" />
+            </p:column>
+
+            <p:column headerText="Owner Name">
+                <h:outputText value="#{com.companyOwnerName}" />
+            </p:column>
+            
+              <p:column headerText="Delete">
+                  <h:commandButton value="Delete" actionListener="#{AdminPanel.deleteCompany(com.companyID)}"> </h:commandButton>
+            </p:column>
+
+        </p:dataTable>
 
 
 

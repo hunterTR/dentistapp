@@ -17,6 +17,7 @@ public class Company {
 
     public String companyName;
 
+    public String companyOwnerName;
     
     public Company(BasicDBObject obj)
     {
@@ -25,7 +26,8 @@ public class Company {
         companyID = tmp.getString("companyid");
         
 
-      
+        companyOwnerName = obj.getString("name");
+        
         companyName = tmp.getString("companyname");
 
     }
@@ -50,6 +52,18 @@ public class Company {
     {
         return companyName;
     }
+    
+    
+       public void setCompanyOwnerName(String id)
+    {
+        this.companyOwnerName = id;
+    }
+    
+    public String getCompanyOwnerName()
+    {
+        return companyOwnerName;
+    }
+    
     
     
     

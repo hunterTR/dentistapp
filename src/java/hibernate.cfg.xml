@@ -7,6 +7,11 @@
     <property name="hibernate.connection.url">jdbc:derby://localhost:1527/sample</property>
     <property name="hibernate.connection.username">app</property>
     <property name="hibernate.connection.password">app</property>
-    <mapping resource="test.hbm.xml"/>
+    <mapping resource="com/dentinium/db/users.hbm.xml"/>
+    <mapping resource="com/dentinium/db/doctors.hbm.xml"/>
+    <mapping resource="com/dentinium/db/reservations.hbm.xml"/>
+    <mapping resource="com/dentinium/db/income.hbm.xml"/>
+    <mapping resource="com/dentinium/db/admins.hbm.xml"/>
+    <mapping resource="com/dentinium/db/customers.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

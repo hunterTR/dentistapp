@@ -47,10 +47,10 @@ public class CustomerPanel {
          this.room = room;
      }
 
-       public String getName() {
+    public String getName() {
         return Util.getName();
     }
-       
+
     public void setName(String name) {
         this.name = name;
     }

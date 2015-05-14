@@ -6,120 +6,174 @@
 package com.dentinium.doctor;
 
 import com.dentinium.auth.Util;
-import com.dentinium.reservation.Reservation;
+import com.dentinium.hibernate.Reservations;
+import com.dentinium.hibernate.Rooms;
 import com.dentinium.reservation.ReservationDataController;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
+import com.dentinium.room.RoomDataController;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 
 /**
  *
  * @author ahmetcem
  */
-@ApplicationScoped
+@ViewScoped
 @ManagedBean(name = "DoctorPanel")
 
 public class DoctorPanel {
- 
-    private String name = Util.getName();
-    private String username = Util.getUserName();
-    private String token = Util.getToken();
-    private boolean doctor;
-    private String email;
-    private String companyname = Util.getCompanyName();
-    private String doctorID = "asdasd";
-    private Date reservationDate = new Date();
-    private String room;
-    private DoctorDataController dataController = new DoctorDataController(token,username);
-    private ReservationDataController resDataController = new ReservationDataController(token,username,name,doctorID);
-    private BasicDBObject doctorObject =dataController.getDoctorObject();
     
-    private List<Reservation> reservationList = resDataController.getReservationsForDoctor();
+    private String name;
     
-     public String getRoom() {
-        return room;
+    private Date reservationDate;
+    private String roomname;
+    
+    private Map<String, Map<String, String>> data = new HashMap<String, Map<String, String>>();
+    private Map<String, String> rooms;
+    ReservationDataController resdatacon = new ReservationDataController();
+    RoomDataController roomdatacon = new RoomDataController();
+    private List<Reservations> reservationsList;
+    private List<Rooms> roomList;
+    
+    
+    public DoctorPanel() {
+        rooms = new HashMap<String, String>();
+        getRoomsHashmap();
     }
-     public void setRoom(String room)
-     {
-         this.room = room;
-     }
 
-       public String getName() {
+    /**
+     * @return the name
+     */
+    public String getName() {
         return Util.getName();
     }
-       
+
+    /**
+     * @param name the name to set
+     */
     public void setName(String name) {
         this.name = name;
     }
 
-    
-     
-    public String getUsername() {
-        return Util.getUserName();
+    /**
+     * @return the reservationsList
+     */
+    public List<Reservations> getReservationsList() {
+        return resdatacon.getReservationsForDoctor(Util.getUserId());
     }
 
-    public void setUsername(String uname) {
-        this.username = uname;
+    /**
+     * @param reservationsList the reservationsList to set
+     */
+    public void setReservationsList(List<Reservations> reservationsList) {
+        this.reservationsList = reservationsList;
     }
 
-    public void setEmail(String mail) {
-        email = mail;
-    }
-    public void setReservationDate(Date date)
-    {
-        reservationDate = date;
-    }
-    public Date getReservationDate()
-    {
+    /**
+     * @return the reservationDate
+     */
+    public Date getReservationDate() {
         return reservationDate;
     }
-    
-     public void setReservationList(List<Reservation> list)
-    {
-        reservationList = list;
-    }
-    public List<Reservation> getReservationList()
-    {
-        return resDataController.getReservationsForDoctor();
-    }
 
-    public String getEmail() {
-        return Util.getEmail();
-    }
-    public void setCompany(String company) {
-        companyname = company;
-    }
-
-    public String getCompany() {
-        return Util.getCompanyName();
+    /**
+     * @param reservationDate the reservationDate to set
+     */
+    public void setReservationDate(Date reservationDate) {
+        this.reservationDate = reservationDate;
     }
     
-    
-     public void setDoctor(boolean doc) {
-        doctor = doc;
-    }
-
-    public boolean getDoctor() {
-        return Util.isDoctor();
-    }
-    
-    public String createReservationDate()
-    {
-      // dataController.createReservationDate(reservationDate,room);
-        System.out.println("Room Number: " + room);
-        resDataController.createReservation(reservationDate, room);
+    public void getRoomsHashmap() {
         
-        return "customerpanel";
+        List<Rooms> rList = roomdatacon.getRoomsByDoctorID(Util.getUserId());
+        if (rList != null) {
+            for (Rooms room : rList) {
+                System.out.println(room.getRoomname());
+                getRooms().put(room.getRoomname(), room.getRoomname());
+                
+            }
+        }  //  data.put(company, map);
+        // doctors = data.get(company);
     }
     
-    public String deleteReservationDate(int reservationID)
-    {
-        resDataController.deleteReservationForDoctor(reservationID);
-        return null;
+    public void createReservationDate() {
+        
+        resdatacon.createReservation(reservationDate, roomname);
+        
+    }
+    
+    public void deleteReservation(int reservationID) {
+        resdatacon.deleteReservationForDoctor(reservationID);
     }
 
+    
+    /**
+     * @return the roomname
+     */
+    public String getRoomname() {
+        return roomname;
+    }
+
+    /**
+     * @param roomname the roomname to set
+     */
+    public void setRoomname(String roomname) {
+        this.roomname = roomname;
+    }
+
+    /**
+     * @return the data
+     */
+    public Map<String, Map<String, String>> getData() {
+        return data;
+    }
+
+    /**
+     * @param data the data to set
+     */
+    public void setData(Map<String, Map<String, String>> data) {
+        this.data = data;
+    }
+
+    /**
+     * @return the rooms
+     */
+    public Map<String, String> getRooms() {
+        return rooms;
+    }
+
+    /**
+     * @param rooms the rooms to set
+     */
+    public void setRooms(Map<String, String> rooms) {
+        this.rooms = rooms;
+    }
+
+    /**
+     * @return the roomList
+     */
+    public List<Rooms> getRoomList() {
+        return roomdatacon.getRoomsByDoctorID(Util.getUserId());
+    }
+
+    /**
+     * @param roomList the roomList to set
+     */
+    public void setRoomList(List<Rooms> roomList) {
+        this.roomList = roomList;
+    }
+    
+    public void deleteRoom(int roomid) {
+        
+    }
+    
+    public void addRoom()
+    {
+        roomdatacon.createRoom(roomname);
+    }
     
 }

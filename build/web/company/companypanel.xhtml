@@ -18,94 +18,101 @@
     <h:body>
 
         <br />
-        <div style = "background-color:#666666">
-       
-        <h:outputLabel value ="#{CompanyPanel.companyName}"></h:outputLabel>
-        <br />
 
-        <h:form id="form">
-            <p:growl id="msgs" showDetail="true" />
 
-            <p:button value="Add Doctor"  outcome="addDoctor.xhtml" icon="ui-icon-star"  />
+            <h:outputLabel value ="#{CompanyPanel.name}"></h:outputLabel>
+            <br />
 
-            <p:button value="Get Finance Report"  outcome="addDoctor.xhtml" icon="ui-icon-star"  />
-            <p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
+            <h:form id="form">
+                <p:growl id="msgs" showDetail="true" />
 
-            </p:dialog>
-        </h:form>
+                <p:button value="Add Doctor"  outcome="addDoctor.xhtml" icon="ui-icon-star"  />
 
-        <br />  
+                <p:button value="Get Finance Report"  outcome="finance.xhtml" icon="ui-icon-star"  />
+                <p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
 
-        <h:form id="form2">
+                </p:dialog>
+            </h:form>
 
-            <p:carousel value="#{CompanyPanel.doctorList}" headerText="Doctors" var="doctor" itemStyleClass="doctorItem">
-                <h:panelGrid columns="2" style="width:100%" cellpadding="5" columnClasses="label,value">
-                    <f:facet name="header">
+            <br />  
+
+            <h:form id="form2">
+
+                <p:carousel value="#{CompanyPanel.doctors}" headerText="Doctors" var="doctor" itemStyleClass="doctorItem">
+                    <h:panelGrid columns="2" style="width:100%" cellpadding="5" columnClasses="label,value">
+                        <f:facet name="header">
+
+                        </f:facet>
+
+                        <h:outputText value="Name" />
+                        <h:outputText value="#{doctor.user.username}" />
+
+                        <h:outputText value="E-mail" />
+                        <h:outputText value="#{doctor.user.email}" />
+
+                        <h:outputText value="Phone" />
+                        <h:outputText value="#{doctor.user.phone}" />
+
+                        <h:outputText value="wage" />
+                        <h:outputText value="10000 TL"/>
+
+                        <h:commandButton value="Delete" actionListener="#{CompanyPanel.deleteDoctor(doctor.doctorid)}"> </h:commandButton>
+
+                    </h:panelGrid>
+
+                    <f:facet name="footer">
 
                     </f:facet>
-
-                    <h:outputText value="Name" />
-                    <h:outputText value="#{doctor.doctorName}" />
-
-                    <h:outputText value="E-mail" />
-                    <h:outputText value="#{doctor.email}" />
-
-                    <h:outputText value="Phone" />
-                    <h:outputText value="#{doctor.phone}" />
-
-                    <h:outputText value="wage" />
-                    <h:outputText value="#{doctor.wage} TL"/>
-
-                    <h:commandButton value="Delete" actionListener="#{CompanyPanel.deleteDoctor(doctor.doctorID)}"> </h:commandButton>
-                    
-                </h:panelGrid>
-
-                <f:facet name="footer">
-
-                </f:facet>
-            </p:carousel>
-        </h:form>
- </div>
+                </p:carousel>
+            </h:form>
+  
         <br />  
 
 
-        <h:form id="form3">
-
-            <p:carousel value="#{CompanyPanel.reservationList}" headerText="Appointments" var="reservation" itemStyleClass="carItem">
+        <h:form id="carousel">
+            <p:carousel value="#{CompanyPanel.reservationsList}" headerText="Appointments" var="reservation" itemStyleClass="carItem">
                 <h:panelGrid columns="2" style="width:100%" cellpadding="5" columnClasses="label,value">
                     <f:facet name="header">
 
                     </f:facet>
                     <h:outputText value="Doctor Name" />
-                    <h:outputText value="#{reservation.doctorName}"/>
+                    <h:outputText value="#{reservation.doctor.user.name}"/>
 
                     <h:outputText value="Room Number" />
-                    <h:outputText value="#{reservation.room}" />
+                    <h:outputText value="#{reservation.room.roomname}" />
 
                     <h:outputText value="Date" />
                     <h:outputText value="#{reservation.date}" />
 
                     <h:outputText value="Patient Name" />
-                    <h:outputText value="#{reservation.customerName}" />
+                    <h:outputText value="#{reservation.user.name}" />
 
                     <h:outputText value="Treatment" />
-                    <h:outputText value="#{reservation.type}" />
+                    <h:outputText value="Treatment A" />
 
                     <h:outputText value="Cost" />
                     <h:outputText value="#{reservation.cost} TL" />
 
-                    <h:commandButton value="Cancel" actionListener="#{CompanyPanel.deleteReservation(reservation.reservationID)}"> </h:commandButton>
-                    <h:commandButton value="Done" actionListener="#{CompanyPanel.deleteDoctor(doctor.doctorID)}"> </h:commandButton>
-                    <h:commandButton value="Didn't Come " actionListener="#{CompanyPanel.deleteDoctor(doctor.doctorID)}"> </h:commandButton>
+                    <h:commandButton value="Cancel" actionListener="#{CompanyPanel.deleteReservation(reservation.reservationid)}"> </h:commandButton>
+
+                    <p:dialog header="Done" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" height="100">
+                        <h:form>   
+                            <p:inputText value="#{CompanyPanel.reservationIncome}" />
+                            <p:commandButton value="OK" type="submit" actionListener="#{CompanyPanel.reservationDone(reservation.reservationid)}" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        </h:form>
+                    </p:dialog>
+                    <p:commandButton value="Done" type="button" onclick="PF('dlg3').show();" />
+            
+                    
+    
                 </h:panelGrid>
 
                 <f:facet name="footer">
 
                 </f:facet>
             </p:carousel>
-        </h:form>
+     </h:form>
 
 
     </h:body>
 </html>
-

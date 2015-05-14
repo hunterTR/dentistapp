@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+
+</h:head> 
+<h:body> 
+ <h2>Registration Form</h2>
+ <h:form>
+  <p:fieldset legend="Registration Form" widgetVar="regWidget" style="width: 600px;">
+   <h:panelGrid columns="3" width="550" border="0">
+    <h:outputLabel value="Username" />
+    <p:inputText value="#{registrationBean.registrationForm.userName}" 
+       id="userName"
+        required="true" 
+        requiredMessage="UserName is required"
+        validatorMessage="UsesrName should be of length from 5 to 15 chars"
+        >
+     <f:validateLength minimum="5" maximum="15" for="userName"></f:validateLength>
+    </p:inputText>
+    <p:message for="userName"/>
+    
+    
+    <h:outputLabel value="Password" />
+    <p:password value="#{registrationBean.registrationForm.password}"
+       id="password"
+       required="true" 
+       requiredMessage="Password is required"
+       validatorMessage="Password should be of length from 5 to 15 chars"
+       >
+      <f:validateLength minimum="5" maximum="15" for="password"></f:validateLength>
+    </p:password>
+    <p:message for="password" />
+    
+    <h:outputLabel value="Name" />
+    <p:inputText value="#{registrationBean.registrationForm.name}"
+       id="name"
+       required="true" 
+       requiredMessage="Name is required"
+       validatorMessage="Name should be of length from 5 to 15 chars"
+       >
+      <f:validateLength minimum="5" maximum="15" for="name"></f:validateLength>
+    </p:inputText>
+    <p:message for="name" />
+    
+    
+    <h:outputLabel value="Email" />
+    <p:inputText value="#{registrationBean.registrationForm.email}"
+       id="email"
+       validatorMessage="Invalid Email">
+     <f:validateRegex pattern="[a-zA-Z0-9]+@[a-zA-Z]+.[a-zA-Z]{2,3}"></f:validateRegex>   
+    </p:inputText>
+    <p:message for="email" />
+    
+    <h:outputLabel value="Phone" />
+    <p:inputText value="#{registrationBean.registrationForm.phone}"
+       id="phone"></p:inputText>
+    <p:message for="phone" />
+    
+    <h:outputLabel value="DOB" />
+    <p:calendar value="#{registrationBean.registrationForm.dob}"
+       id="dob"
+       converterMessage="Invalid Date"
+       pattern="dd-MM-yyyy">
+     
+    </p:calendar>
+    <p:message for="dob" />
+    
+     <h:outputLabel value="Address" />
+    <p:inputText value="#{registrationBean.registrationForm.address}"
+       id="address"></p:inputText>
+    <p:message for="address" />
+    
+
+    
+    <p:commandButton value="Register" action="#{registrationBean.register}" ajax="false"></p:commandButton>
+   </h:panelGrid>
+  </p:fieldset>
+ 
+ </h:form>
+</h:body>  
+</html>

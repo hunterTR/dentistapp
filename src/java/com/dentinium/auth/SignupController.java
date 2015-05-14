@@ -5,20 +5,17 @@
  */
 package com.dentinium.auth;
 
-import com.dentinium.db.dbconn;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
+import com.dentinium.hibernate.Users;
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 
 /**
  *
@@ -69,8 +66,8 @@ public class SignupController implements Serializable {
 
     public String signUpIfNotLoggedIn() {
         if (Util.isLoggedIn()) {
-            resultText = "You are already logged in!";
-            return "signupsuccess";
+            return signUp();
+  
         } else {
             return signUp();
 
@@ -78,48 +75,118 @@ public class SignupController implements Serializable {
     }
 
     public String signUp() {
-        String returnText = "signuperror";
-        dbconn dbDAO = null;
+        
+
+        
+             Session session = createSession();
+        Transaction transaction = null;
         try {
-            dbDAO = new dbconn();
-            dbDAO.openDB();
+            transaction = session.beginTransaction();
+         
+           
+            Users rd = new Users(1,"hunterTR","alanya123", "ahmetcem3@gmail.com","Ahmet Cem Kaya");
+            session.save(rd);
+            transaction.commit();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "DONE!", ""));
+            return "success";
+            
+        } catch (HibernateException ex) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "DATABASE ERROR", ""));
 
-            boolean isCollectionAvailable = dbDAO.connectDBCollection("users");
-            BasicDBObject searchQuery = dbDAO.getBasicDBObject();
-            searchQuery.put("username", username);
-            DBCursor cursor = dbDAO.searchData(searchQuery);
-            if (!cursor.hasNext()) {
-                if (isCollectionAvailable) {
-                    BasicDBObject userDocument = new BasicDBObject();
-                    String token = "notsetyet";
-                    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                    Date date = new Date();
-                    
-                    userDocument.put("username", username);
-                    userDocument.put("email", email);
-                    userDocument.put("password", password);
-                    userDocument.put("token", token);
-                    userDocument.put("lastlogin", date);
-                    userDocument.put("date", date);
-                    userDocument.put("admin", false);
-                    userDocument.put("doctor", false);
-                    userDocument.put("company", false);
-
-                    dbDAO.insertData(userDocument);
-                    returnText = "signupsuccess";
-                    resultText = "You have been signed Up!";
-                }
-            } else {
-                resultText = "Username is in use by another user.";
-                returnText = "signupsuccess";
+            if (transaction != null) {
+                transaction.rollback();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+          
         } finally {
-            dbDAO.closeDB();
+            session.close();
         }
-        System.out.println(resultText);
-        return returnText;
+        
+    return "LoginError";
+        
+    }
+    
+    
+    public Session createSession() {
+        SessionFactory factory = new Configuration().configure().buildSessionFactory();
+        return factory.openSession();
     }
 
+    
+
 }
+
+
+/*
+
+Company adder
+
+
+            Session session = createSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+         
+           UserDataController userdatacon = new UserDataController();
+           Users us = userdatacon.getUserByID(Util.getUserId());
+           
+           Company comp = new Company(1,us,"dentinium");
+            
+            session.save(comp);
+            transaction.commit();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "DONE!", ""));
+            return "success";
+            
+        } catch (HibernateException ex) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "DATABASE ERROR", ""));
+
+            if (transaction != null) {
+                transaction.rollback();
+            }
+          
+        } finally {
+            session.close();
+        }
+        
+    return "LoginError";
+
+
+*/
+
+
+
+
+/*
+DOCTOR ADDER
+
+              Session session = createSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+         
+           UserDataController userdatacon = new UserDataController();
+           CompanyDataController companydatacon = new CompanyDataController();
+           
+           System.out.println("signup function company name check :" + Util.getCompanyName());
+           Company comp = companydatacon.getCompanyByName(Util.getCompanyName());
+           Users us = userdatacon.getUserByID(Util.getUserId());
+           
+           Doctors doc = new Doctors(2,comp,us);
+            
+            session.save(doc);
+            transaction.commit();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "DONE!", ""));
+            return "success";
+            
+        } catch (HibernateException ex) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "DATABASE ERROR", ""));
+
+            if (transaction != null) {
+                transaction.rollback();
+            }
+          
+        } finally {
+            session.close();
+        }
+        
+    return "LoginError";
+*/

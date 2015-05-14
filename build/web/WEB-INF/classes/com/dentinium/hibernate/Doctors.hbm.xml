@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 9, 2015 1:08:48 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.dentinium.hibernate.Doctors" table="DOCTORS" schema="APP" optimistic-lock="version">
+        <id name="doctorid" type="int">
+            <column name="DOCTORID" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="user" column="USERS" class="com.dentinium.hibernate.Users" not-null="true"/>
+        <many-to-one name="company" column="COMPANY" class="com.dentinium.hibernate.Company" not-null="true"/>
+
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 9, 2015 1:08:48 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.dentinium.hibernate.Users" table="USERS" schema="APP" optimistic-lock="version">
+        <id name="userid" type="int">
+            <column name="USERID" />
+            <generator class="assigned" />
+        </id>
+        <property name="username" type="string">
+            <column name="USERNAME" length="20" not-null="true" unique="true" />
+        </property>
+         <property name="password" type="string">
+            <column name="PASSWORD" length="20" not-null="true" unique="true" />
+        </property>
+        <property name="token" type="string">
+            <column name="TOKEN" length="18" />
+        </property>
+        <property name="lastlogin" type="timestamp">
+            <column name="LASTLOGIN" length="29" />
+        </property>
+        <property name="date" type="timestamp">
+            <column name="DATE" length="29" />
+        </property>
+        <property name="phone" type="string">
+            <column name="PHONE" length="11" />
+        </property>
+        <property name="email" type="string">
+            <column name="EMAIL" length="20" not-null="true" unique="true" />
+        </property>
+        <property name="address" type="string">
+            <column name="ADDRESS" length="50" />
+        </property>
+        <property name="name" type="string">
+            <column name="NAME" length="20" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

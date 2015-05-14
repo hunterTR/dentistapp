@@ -5,51 +5,95 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
+    <link rel="stylesheet" href="   /le-frog/theme.css" />   
+
     <h:head>
         <title>Dentinium</title>
     </h:head>
     <h:body>
 
+
         <br />
 
         <h:outputLabel value ="Welcome: DR. #{DoctorPanel.name}"></h:outputLabel>
         <br />
-        <h:form id="form2">
-            <p:growl id="msgs" showDetail="true" />
 
-            <p:button value="Create Reservation"  outcome="createreservation.xhtml" icon="ui-icon-star"  />
 
-  
-        <p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
 
-        </p:dialog>
-    </h:form>
+            <p:dialog header="Create Reservation" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" height="150">
+                <h:form id="form4">
+                    <p:growl id="msgs" showDetail="true" />
+
+
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <p:outputLabel for="datetime" value="Datetime:" />
+                        <p:calendar id="datetime" value="#{DoctorPanel.reservationDate}" pattern="MM/dd/yyyy HH:mm:ss" />
+
+                        <p:outputLabel for="room" value="Room: " />
+                        <p:selectOneMenu id="room" value="#{DoctorPanel.roomname}" style="width:250px">
+                            <f:selectItem itemLabel="Select Room" itemValue="" noSelectionOption="false" />
+                            <f:selectItems value="#{DoctorPanel.rooms}" />
+                        </p:selectOneMenu>
+
+                    </h:panelGrid>
+                    <p:commandButton value="Submit" update="msgs" actionListener="#{DoctorPanel.createReservationDate}" icon="ui-icon-check" />
+
+                    <p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
+
+                    </p:dialog>
+                </h:form>
+            </p:dialog>
+     
+
+        <p:commandButton value="Create Reservation" type="button" onclick="PF('dlg3').show();"  icon="ui-icon-star" />
+
+            <p:dialog header="Add Room" widgetVar="dlg2" showEffect="explode" hideEffect="bounce" height="100">
+                <h:form id="form7">
+                    <p:growl id="msgs2" showDetail="true" />
+
+
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <p:outputLabel for="roomname" value="Room Name:" />
+                        <p:inputText id="roomname" value="#{DoctorPanel.roomname}" />
+                    </h:panelGrid>
+                    <p:commandButton value="Submit" update="msgs2" actionListener="#{DoctorPanel.addRoom()}" icon="ui-icon-check" />
+
+                    <p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
+
+                    </p:dialog>
+                </h:form>
+            </p:dialog>
+             
+            <p:commandButton value="Add Room" type="button" onclick="PF('dlg2').show();"  icon="ui-icon-star" />
+
+ 
+        <br />
         <br />
 
         <h:form id="form">
 
-            <p:carousel value="#{DoctorPanel.reservationList}" headerText="Appointments" var="reservation" itemStyleClass="carItem">
+            <p:carousel value="#{DoctorPanel.reservationsList}" headerText="Appointments" var="reservation" itemStyleClass="carItem">
                 <h:panelGrid columns="2" style="width:100%" cellpadding="5" columnClasses="label,value">
                     <f:facet name="header">
 
                     </f:facet>
 
                     <h:outputText value="Room Number" />
-                    <h:outputText value="#{reservation.room}" />
+                    <h:outputText value="#{reservation.room.roomname}" />
 
                     <h:outputText value="Date" />
                     <h:outputText value="#{reservation.date}" />
 
                     <h:outputText value="Patient Name" />
-                    <h:outputText value="#{reservation.customerName}"/>
+                    <h:outputText value="#{reservation.user.name}"/>
 
                     <h:outputText value="Type" />
-                    <h:outputText value="#{reservation.type}" />
+                    <h:outputText value="Treatment A" />
 
                     <h:outputText value="Cost" />
-                    <h:outputText value="#{reservation.cost}" />
+                    <h:outputText value="#{reservation.reservationid}" />
 
-                    <h:commandButton value="Cancel" actionListener="#{DoctorPanel.deleteReservationDate(reservation.reservationID)}"> </h:commandButton>
+                    <h:commandButton value="Cancel" actionListener="#{DoctorPanel.deleteReservation(reservation.reservationid)}"> </h:commandButton>
                 </h:panelGrid>
 
                 <f:facet name="footer">
@@ -57,6 +101,32 @@
                 </f:facet>
             </p:carousel>
         </h:form>
+
+
+
+        <h:form id="form3">
+
+            <p:carousel value="#{DoctorPanel.roomList}" headerText="Rooms" var="room" itemStyleClass="carItem">
+                <h:panelGrid columns="2" style="width:100%" cellpadding="5" columnClasses="label,value">
+                    <f:facet name="header">
+
+                    </f:facet>
+
+                    <h:outputText value="Room Name" />
+                    <h:outputText value="#{room.roomname}" />
+
+
+                    <h:commandButton value="Cancel" actionListener="#{DoctorPanel.deleteRoom(room.roomid)}"> </h:commandButton>
+                </h:panelGrid>
+
+                <f:facet name="footer">
+
+                </f:facet>
+            </p:carousel>
+        </h:form>
+
+
+
         <br/>
     </h:body>
 </html>

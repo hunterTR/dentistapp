@@ -1,0 +1,67 @@
+@charset "utf-8";
+* {padding:0;margin:0;}
+.left {float: left;}
+.right {float: right;}
+.clear {clear: both;}
+a {text-decoration:none;border:0;outline:none;}
+body {font-family: Arial,Helvetica,sans-serif;}
+.header {background-color: #373A3F; width: 100%; height: 39px;}
+.container {width: 942px; background-color: #FFF; margin: 0 auto;}
+.sagUst {width: 210px;height: 25px; float: right; font-size: 10px;font-weight: bold; margin: 9px 16px 0 0px;}
+.sagUst ul li {float: left;list-style-type: none; color: #CECCCC; margin: 0 3px 0 0; line-height: 17px;}
+.sagUst ul li a {text-underline-position: none; color: #CECCCC;}
+.sagUst ul li a:hover {color:#29ACDC;}
+.headerRow {width: 942px; height: 236px; background-color: #FFF; margin: 0 auto;}
+.logo {float:left; margin: 85px 0 0 0px;}
+.topresim {margin: 59px 8px 0 65px; float:left;}
+.topresim2 {width: 242px; float:right; margin: 74px 0px 0 0px;background: #07C1D2; text-align: center}
+.search {float:right; width: 260px; height: 28px; margin: 59px 0px 0 0px;}
+.arama {margin: 0 2px 0 18px; float:left; width: 176px; height: 28px; background: #FFF; border: 1px solid #ECECEC; color: #C0BAB6;font-family: 'Open Sans', sans-serif; text-indent: 5px;}
+.submit {margin: 0 0 0 0px; width: 64px; height: 28px; background-color: #1F90BA; border: 0; text-align: center; color: white; font-size: 13px; font-family: Helvetica;}
+.submit:hover {background-color: #373B40; transition-duration: 0.5s;}
+nav {height: 50px; width: 942px;font-size: 15px; font-weight: bold;text-align: center; margin-top: 10px;}
+.yazi1 {width: 230px; height:300px; color: #373A3F; text-transform: uppercase; float: left; font-family: "Anton",sans-serif; font-size: 47px; line-height: 45px;}
+.yazi1alt {display: block; text-transform: uppercase; float: left; color: #909296; font-size: 17px; line-height: 20px; margin: 13px 0 0 0;font-family:sans-serif; font-weight:normal; letter-spacing: -1px;}
+.yazi2 { margin: 0 0 0 10px; float: left; width: 460px; height: 300px;}
+.resim {float:  left; width: 233px;height: 145px;}
+.welcome {float: left; text-transform: uppercase; width: 200px; font-size: 25px;font-family: "Anton",sans-serif; font-weight: normal;line-height: 30px; color: #373A3F; padding-bottom: 10px;}
+.text {font-family: "Anton",sans-serif;}
+.text h4 {text-transform: uppercase; color: #909296; font-size: 16,5px; line-height: 20px;font-family:sans-serif; font-weight:bolder; letter-spacing: -1px; padding-bottom: 20px;}
+.text p {color: #83868a; font-family: Arial,Helvetica,sans-serif; font-size: 13px; line-height: 18px;}
+.yazi3 { margin: 0 0 0 8px; float: left; width: 234px; height: 300px;}
+.whatwedo {margin: 0 0 0 25px; float: left; text-transform: uppercase; width: 200px; font-size: 25px;font-family: "Anton",sans-serif; font-weight: normal;line-height: 30px; color: #373A3F;}
+.yazi3 ul li {list-style-type: none;background: url("../images/marker1.gif") no-repeat scroll -3px 14px;}
+.yazi3 ul li a {padding:0 0 0 12px; font-size: 10px;font-weight: bold;line-height: 18px;text-transform: uppercase;font-family: Arial,Helvetica,sans-serif;color: #07C1D2;}
+.yazi3 ul li a:hover {transition: all 0.5s ease 0s; color: #373A3F;}
+.yazilar2 {width: 942px; height: 600px;margin: 25px auto; background-color: #FFF;}
+.sol {float: left;border-right: 1px solid #E7E7E8; width:470;}
+.soltop {text-transform: uppercase; width: 480px; font-size: 24px;font-family: "Anton",sans-serif; font-weight: normal;line-height: 30px; color: #373A3F; padding-bottom: 10px;}
+.solorta {margin: 20px 0 0 0; width: 450px;height: 140px;}
+.solortaresim {float: left; width: 41px; height: 90px;}
+.solortabaslik a {color: #373A3F; font-size: 17px;font-family: "Anton",sans-serif;}
+.solortabaslikalt {margin: 5px 0 0 0; height: 66px; width: 420px; color: #83868a; font-family: Arial,Helvetica,sans-serif; font-size: 13px; line-height: 18px;}
+.moreButton {width: 65px; height: 33px; background: #4B4B4B; color: #fff; text-align: center; line-height: 25px; border: 0; cursor: pointer;font-size: 12px; margin-top: 10px; font-family: Arial,Helvetica,sans-serif; }
+.moreButton:hover {background: #5BA0D0;}
+.solortabaslik {width: 400px;float: left ;}
+.sag {width: 460px; float: right}
+.sagtop {margin: 0 0 0 30px; text-transform: uppercase; width: 450px; font-size: 24px;font-family: "Anton",sans-serif; font-weight: normal;line-height: 30px; color: #373A3F; padding-bottom: 10px;}
+.sagorta {margin: 20px 0 0 30px; width: 450px;height: 50px;color: #83868a; font-family: Arial,Helvetica,sans-serif; font-size: 13px; line-height: 18px;}
+.sagliste {margin:33px 0 0 28px; width: 450px;}
+.sagliste ul li { font-family: Arial,Helvetica,sans-serif; font-size: 13px; line-height: 18px; list-style-type:none; margin-bottom: 15px;}
+.sagliste ul li a{color: #83868a;}
+.moreButton2 {width: 65px; height: 33px; background: #4B4B4B; color: #fff; text-align: center; line-height: 25px; border: 0; cursor: pointer;font-size: 12px; font-family: Arial,Helvetica,sans-serif; margin: 38px 0 0 30px; }
+.moreButton2:hover {background: #5BA0D0;}
+.aracizgi{border-top: 1px dashed #C0C0C0; margin: 60px 0 0 0;}
+.listeResim {width: 100%}
+.listeResim li {list-style-type: none; float: left; }
+.listeResim ul li img{margin: 40px 50px 0 0;cursor: pointer;}
+.listeResim ul li img:hover {opacity:0.5;transition: all 0.5s ease 0s;}
+.listeResim ul li img.eleman {margin: 40px 0 0 0;}
+.aracizgi2 {border-top: 1px dashed #C0C0C0; margin: 45px 0 0 0 ;}
+.footer{width: 100%; height: 60px;}
+.footergif {float: left;margin: 10px 0 0 0;}
+.footerlink {margin: 69px 0 0 5px; float: left}
+.footerlink a {color: #373a3f; font-family: Arial,Helvetica,sans-serif; font-size: 12px;}
+.footerlink a:hover {color: #1f90ba; transition: all 0.5s ease 0s;}
+.footeryazi { color: #555454; float: left; margin: 69px 0 0 7px; font-size: 15px;}
+.footersag {float: right;margin: 53px 0 0 0px;}

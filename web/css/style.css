@@ -1,0 +1,56 @@
+@charset "utf-8";
+* {padding:0;margin:0;}
+.left {float: left;}
+.right {float: right;}
+.clear {clear: both;}
+a {text-decoration:none;border:0;outline:none;}
+body{font-size:13px;font-family: inherit; color:#919191; background-color:#FFF;}
+.header {background-color: #333333 ;width: %100;height: 173px;}
+.container {width: 960px;margin: 0 auto;}
+.yazi {font-size: 37px; color: #C0BAB6;padding: 22px 0 0 0;}
+.yazi span {font-size: 15px; display: block; }
+.arama {text-indent:5px;width: 210px; height: 25px; background: #232323; border: 1px solid grey; color: #C0BAB6;font-family: 'Open Sans', sans-serif; margin: 0 4px 0 0;}
+.aramaPadding {padding: 40px 0 0 0;}
+.submit {background-color: darkorange; width:70px ; height: 27px; border: 0; text-align: center; color: white; font-family: inherit;font-weight: bold;}
+.menu {width: 100%;background: #232323; height:55px; margin: 14px 0 0 0;}
+.menu ul li {padding: 18px 0 0 20px; list-style-type: none;float: left; }
+.menu ul li a {font-size: 14px;color:#C0BAB6;}
+.menu ul li a:hover {color:orange;}
+.sol {margin: 30px 0 0 0; background: #464646; width: 330px; height: 300px; float:left;}
+.sol p {padding: 16px 0 0px 17px; font-size:45px; font-style: italic}
+.sol h3 {padding: 5px 4px 0 17px; font-size: 17px; font-weight: lighter;}
+.sol a {color: darkorange; float: right; font-size: 15px; margin: 20px 16px 0 0;}
+.sag {margin: 30px 0 0 0; background: #333333; width: 630px; height: 300px; float: left;}
+.sag h1 {margin: 133px 0 0 0; color: #F8F8F8; font-size: 34px; font-family:inherit; text-align: center;}
+.solAlt {width: 463px;height:200px;margin: 25px 1px 0 0;background: white; float:left;}
+.solAlt p {color:#979797;font-size: 24px; font-style: italic}
+.solAlt h3 {font-size: 15px; margin: 12px 0 0 0;font-weight: lighter}
+.solAlt a {color:darkorange}
+.kutuHiza {margin: 20px 0 0 0px; float:left; width: 495px; }
+.kutu {border:1px solid #D6D6D6; background: #fff;margin: 15px 0 0 25px; padding: 4px; float: left;}
+.sagAlt {width: 130px; height: 130px; background: #333333;float: left; margin: 0 0px 0 0; }
+.sagAlt h2 {text-align: center; margin: 49px 0 0 0; color: white;}
+.sagAlt2 {color: darkorange; font-weight:800; font-size: 15px;margin: 15px 0 0 0;text-align: center; display:  block;}
+.yazisol {margin: 60px 1px 33px 0; width: 230px; height: 230px; float: left;}
+.yazisol h2 {color: #979797; font-style: italic; font-weight: bold; font-size: 17px;}
+.yazisol h3 {color: #979797; font-style: italic; margin: 30px 0 0 0; font-size: 16px;}
+.yazisol h4 {margin: 1px 0 0 0; font-size: 16px; font-weight: lighter;}
+.yazisol p {margin: 19px 0 0 0; font-size: 15px;}
+.yaziorta {margin: 60px 1px 33px 15px; width: 225px; height: 230px; float: left;}
+.yaziorta h2 {color: #979797; font-style: italic; font-weight: bold; font-size: 17px;}
+.yaziorta ul {padding: 25px 0 0 0;}
+.yaziorta ul li {padding: 7px 0; list-style-type:none; font-size: 15px; border-bottom: 1px solid #d6d6d6; }
+.yaziorta ul li a {color:darkorange;}
+.yaziorta ul li a small {font-size: 10px; color: #979797;}
+.yaziorta hr {margin: 7px 0 0 0; width: 100%;}
+.yazisag {margin: 60px 1px 33px 20px;  height: 230px; float: right;}
+.yazisag h2 {color: #979797; font-style: italic; font-weight: bold; font-size: 17px;}
+.resim {width: 130px; height: 130px; background: #333333;float: left;margin: 30px 0 0 0px; border:5px solid #D6D6D6;}
+.resim h3 {text-align: center; margin: 49px 0 0 0; color: white;font-size: 19px;}
+.yazison {margin: 52px 0 0 15px; width: 300px; text-align: justify; font-size: 15px;}
+.yazison a {display: block;color:darkorange;text-align: right; margin: 25px 0 0 0; font-size: 14px;}
+.footer {background-color: #232323; width: 100%; height: 56px;}
+.container2 {width: 960px;margin: 0 auto;background-color: #232323;height: 100%; position: relative; margin: auto}
+.enaltsol{font-size: 15px;padding: 20px 0 0 0;width: 400px;}
+.enaltsag {font-size: 15px; padding: 20px 0 0 0;}
+.cizgi {height: 1px; width: 100%; background: #d6d6d6; margin: 33px 0 0 0;}

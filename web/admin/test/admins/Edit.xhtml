@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AdminsEditDlg" widgetVar="AdminsEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditAdminsTitle}">
+            <h:form id="AdminsEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{adminsController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditAdminsLabel_adminid}" for="adminid" />
+                        <p:inputText id="adminid" value="#{adminsController.selected.adminid}" title="#{bundle.EditAdminsTitle_adminid}" required="true" requiredMessage="#{bundle.EditAdminsRequiredMessage_adminid}"/>
+                        <p:outputLabel value="#{bundle.EditAdminsLabel_userid}" for="userid" />
+                        <p:inputText id="userid" value="#{adminsController.selected.userid}" title="#{bundle.EditAdminsTitle_userid}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{adminsController.update}" value="#{bundle.Save}" update="display,:AdminsListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AdminsEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AdminsEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

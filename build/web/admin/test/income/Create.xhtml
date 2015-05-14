@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="IncomeCreateDlg" widgetVar="IncomeCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateIncomeTitle}">
+            <h:form id="IncomeCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{incomeController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateIncomeLabel_incomeid}" for="incomeid" />
+                        <p:inputText id="incomeid" value="#{incomeController.selected.incomeid}" title="#{bundle.CreateIncomeTitle_incomeid}" required="true" requiredMessage="#{bundle.CreateIncomeRequiredMessage_incomeid}"/>
+                        <p:outputLabel value="#{bundle.CreateIncomeLabel_reservationid}" for="reservationid" />
+                        <p:inputText id="reservationid" value="#{incomeController.selected.reservationid}" title="#{bundle.CreateIncomeTitle_reservationid}" />
+                        <p:outputLabel value="#{bundle.CreateIncomeLabel_userid}" for="userid" />
+                        <p:inputText id="userid" value="#{incomeController.selected.userid}" title="#{bundle.CreateIncomeTitle_userid}" />
+                        <p:outputLabel value="#{bundle.CreateIncomeLabel_doctorid}" for="doctorid" />
+                        <p:inputText id="doctorid" value="#{incomeController.selected.doctorid}" title="#{bundle.CreateIncomeTitle_doctorid}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{incomeController.create}" value="#{bundle.Save}" update="display,:IncomeListForm:datalist,:growl" oncomplete="handleSubmit(args,'IncomeCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="IncomeCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

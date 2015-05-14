@@ -4,14 +4,17 @@
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.DerbyDialect</property>
     <property name="hibernate.connection.driver_class">org.apache.derby.jdbc.ClientDriver</property>
-    <property name="hibernate.connection.url">jdbc:derby://localhost:1527/sample</property>
+    <property name="hibernate.connection.url">jdbc:derby://localhost:1527/dentapp2</property>
     <property name="hibernate.connection.username">app</property>
     <property name="hibernate.connection.password">app</property>
-    <mapping resource="com/dentinium/db/users.hbm.xml"/>
-    <mapping resource="com/dentinium/db/doctors.hbm.xml"/>
-    <mapping resource="com/dentinium/db/reservations.hbm.xml"/>
-    <mapping resource="com/dentinium/db/income.hbm.xml"/>
-    <mapping resource="com/dentinium/db/admins.hbm.xml"/>
-    <mapping resource="com/dentinium/db/customers.hbm.xml"/>
+    <property name="hibernate.hbm2ddl.auto">update</property>
+    <property name="hibernate.current_session_context_class">thread</property>
+    <mapping resource="com/dentinium/hibernate/Rooms.hbm.xml"/>
+    <mapping resource="com/dentinium/hibernate/Users.hbm.xml"/>
+    <mapping resource="com/dentinium/hibernate/Admins.hbm.xml"/>
+    <mapping resource="com/dentinium/hibernate/Company.hbm.xml"/>
+    <mapping resource="com/dentinium/hibernate/Doctors.hbm.xml"/>
+    <mapping resource="com/dentinium/hibernate/Reservations.hbm.xml"/>
+    <mapping resource="com/dentinium/hibernate/Income.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

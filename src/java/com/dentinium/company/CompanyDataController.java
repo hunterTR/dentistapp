@@ -1,31 +1,66 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.dentinium.company;
 
-import com.dentinium.auth.Util;
-import com.dentinium.db.dbconn;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
-import java.util.ArrayList;
+import com.dentinium.hibernate.Company;
 import java.util.List;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
 /**
  *
  * @author ahmetcem
  */
 public class CompanyDataController {
-    
-    
-    
-    
-    
- 
 
-    
-   
-    
+    public CompanyDataController() {
+
+    }
+
+    public void createCompany(int userid) {
+
+    }
+
+    public Company getCompanyByName(String companyname) {
+        Session session = createSession();
+        Query query = session.createQuery("FROM Company WHERE companyname = :companyname");
+        query.setParameter("companyname", companyname);
+
+        List companies = query.list();
+
+        if (companies.size() >= 1) {
+            Company comp = (Company) companies.get(0);
+            System.out.println("Company FOUND");
+            session.close();
+            return comp;
+        } else {
+            System.out.println("Company COULDN'T BE FOUND!");
+            session.close();
+            return null;
+        }
+
+    }
+
+    public List<Company> getCompanies() {
+        Session session = createSession();
+        Query query = session.createQuery("FROM Company");
+
+        List companies = query.list();
+
+        if (companies.size() >= 1) {
+            session.close();
+            return companies;
+        } else {
+
+            System.out.println("Company COULDN'T BE FOUND!");
+            session.close();
+            return null;
+        }
+    }
+
+    public Session createSession() {
+        SessionFactory factory = new Configuration().configure().buildSessionFactory();
+        return factory.openSession();
+    }
+
 }

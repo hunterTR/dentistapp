@@ -19,7 +19,9 @@
 
         <h:form>
     <p:growl id="msgs" showDetail="true" />
- 
+    <p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
+
+        </p:dialog>
     <p:panel header="Make an Appointment" style="margin-bottom:10px;">
         <h:panelGrid columns="2" cellpadding="5">
             <p:outputLabel for="company" value="Company " />
@@ -32,7 +34,7 @@
             <p:outputLabel for="doctor" value="Doctor: " />
             <p:selectOneMenu id="doctor" value="#{AppointmentBean.doctor}" style="width:250px">
                 <p:ajax listener="#{AppointmentBean.onDoctorChange}" update="reservationDate" />
-                <f:selectItem itemLabel="Anyone" itemValue="" noSelectionOption="true" />
+                <f:selectItem itemLabel="Select Doctor" itemValue="" noSelectionOption="true" />
                 <f:selectItems value="#{AppointmentBean.doctors}" />
             </p:selectOneMenu>
             

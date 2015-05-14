@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ReservationsEditDlg" widgetVar="ReservationsEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditReservationsTitle}">
+            <h:form id="ReservationsEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{reservationsController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditReservationsLabel_reservationid}" for="reservationid" />
+                        <p:inputText id="reservationid" value="#{reservationsController.selected.reservationid}" title="#{bundle.EditReservationsTitle_reservationid}" required="true" requiredMessage="#{bundle.EditReservationsRequiredMessage_reservationid}"/>
+                        <p:outputLabel value="#{bundle.EditReservationsLabel_customerid}" for="customerid" />
+                        <p:inputText id="customerid" value="#{reservationsController.selected.customerid}" title="#{bundle.EditReservationsTitle_customerid}" />
+                        <p:outputLabel value="#{bundle.EditReservationsLabel_doctorid}" for="doctorid" />
+                        <p:inputText id="doctorid" value="#{reservationsController.selected.doctorid}" title="#{bundle.EditReservationsTitle_doctorid}" />
+                        <p:outputLabel value="#{bundle.EditReservationsLabel_date}" for="date" />
+                        <p:calendar id="date" pattern="MM/dd/yyyy" value="#{reservationsController.selected.date}" title="#{bundle.EditReservationsTitle_date}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditReservationsLabel_roomid}" for="roomid" />
+                        <p:inputText id="roomid" value="#{reservationsController.selected.roomid}" title="#{bundle.EditReservationsTitle_roomid}" />
+                        <p:outputLabel value="#{bundle.EditReservationsLabel_cost}" for="cost" />
+                        <p:inputText id="cost" value="#{reservationsController.selected.cost}" title="#{bundle.EditReservationsTitle_cost}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{reservationsController.update}" value="#{bundle.Save}" update="display,:ReservationsListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ReservationsEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ReservationsEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

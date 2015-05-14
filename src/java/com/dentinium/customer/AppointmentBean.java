@@ -1,21 +1,21 @@
 package com.dentinium.customer;
 
-import com.dentinium.auth.Util;
-import com.dentinium.company.Company;
-import com.dentinium.doctor.Doctor;
-import com.dentinium.reservation.Reservation;
+import com.dentinium.company.CompanyDataController;
+import com.dentinium.doctor.DoctorDataController;
+import com.dentinium.hibernate.Company;
+import com.dentinium.hibernate.Doctors;
+import com.dentinium.hibernate.Reservations;
 import com.dentinium.reservation.ReservationDataController;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 /*
@@ -27,14 +27,15 @@ import javax.faces.context.FacesContext;
  *
  * @author ahmetcem
  */
-@ApplicationScoped
-@ManagedBean(name = "AppointmentBean")
 
+@ManagedBean(name = "AppointmentBean")
+@ViewScoped
 public class AppointmentBean {
 
     private Map<String, Map<String, String>> data = new HashMap<String, Map<String, String>>();
     private Map<String, Map<Date, String>> data2 = new HashMap<String, Map<Date, String>>();
     private String company;
+    private int companyid;
     private String doctor;
     private String treatment;
     private Date reservationDate;
@@ -43,8 +44,11 @@ public class AppointmentBean {
     private Map<String, String> treatments;
      private Map<Date, String> reservationDates;
      private int reservationID;
-
-    private ReservationDataController resDataController = new ReservationDataController(Util.getToken(), Util.getUserName(), Util.getName(), Util.getUserId());
+     
+     private ReservationDataController resdatacon = new ReservationDataController();
+     private DoctorDataController docdatacon = new DoctorDataController();
+private CompanyDataController compdatacon = new CompanyDataController();
+   
 
     public Map<String, Map<String, String>> getData() {
         return data;
@@ -52,7 +56,12 @@ public class AppointmentBean {
 
     @PostConstruct
     public void init() {
+        
+        
+
         companies = new HashMap<String, String>();
+        doctors = new HashMap<String,String>();
+        reservationDates = new HashMap<Date,String>();
         setCompanies();
 
         treatments = new HashMap<String, String>();
@@ -61,6 +70,8 @@ public class AppointmentBean {
         treatments.put("Treatment C", "Treatment C");
 
     }
+    
+    
 
     public String getCompany() {
         return company;
@@ -118,23 +129,26 @@ public class AppointmentBean {
     }
 
     public void setCompanies() {
-        List<Company> cList = resDataController.getCompanyList();
 
-        for (Company comp : cList) {
-            System.out.println(comp.companyName);
-            companies.put(comp.companyName, comp.companyName);
-        }
+        List<Company> companyList  = compdatacon.getCompanies();
+        
+         for (Company comp : companyList) {
+               // System.out.println(doc.getName());
+                companies.put(comp.getCompanyname(), comp.getCompanyname());
+            }
+        
 
     }
 
     public void onCompanyChange() {
+        System.out.println("ON COmpany CHANGEE!!" + company);
         if (company != null && !company.equals("")) {
-            List<Doctor> dList = resDataController.getDoctorListByCompany(company);
+            List<Doctors> dList = docdatacon.getDoctorsByCompanyName(company);
             Map<String, String> map = new HashMap<String, String>();
 
-            for (Doctor doc : dList) {
-                System.out.println(doc.doctorName);
-                map.put(doc.doctorName, doc.doctorName);
+            for (Doctors doc : dList) {
+                System.out.println(doc.getUser().getName());
+                map.put(doc.getName(), doc.getName());
             }
 
             data.put(company, map);
@@ -148,14 +162,17 @@ public class AppointmentBean {
 
     public void onDoctorChange() {
 
-            if (doctor != null && !doctor.equals("")) {
-            List<Reservation> rList = resDataController.getPossibleReservationsByDoctor(doctor);
+        System.out.println("ON DOCTOR CHANGEE!!" + doctor);
+          if (doctor != null && !doctor.equals("")) {
+            List<Reservations> rList = resdatacon.getPossibleReservationsForUsers(doctor);
             System.out.println("SIZE OF RES DATE LIST : " + rList.size());
             Map<Date,String> map = new HashMap<Date, String>();
 
-            for (Reservation res : rList) {
-                System.out.println(res.date);
-                map.put(res.date,Integer.toString(res.reservationID));
+                 System.out.println("ON DOCTOR CHANGEE!!");
+            for (Reservations res : rList) {
+                
+                System.out.println(res.getDate());
+                map.put(res.getDate(),Integer.toString(res.getReservationid()));
             }
 
             data2.put(doctor, map);
@@ -170,7 +187,7 @@ public class AppointmentBean {
 
        System.out.println("Reservation ID :"+reservationID);
 
-       resDataController.updateReservation(reservationID,treatment);  // make an appointment
+       resdatacon.updateReservation(reservationID);
        
        //redirect
         try {
@@ -179,6 +196,20 @@ public class AppointmentBean {
             Logger.getLogger(AppointmentBean.class.getName()).log(Level.SEVERE, null, ex);
         }
        
+    }
+
+    /**
+     * @return the companyid
+     */
+    public int getCompanyid() {
+        return companyid;
+    }
+
+    /**
+     * @param companyid the companyid to set
+     */
+    public void setCompanyid(int companyid) {
+        this.companyid = companyid;
     }
 
 

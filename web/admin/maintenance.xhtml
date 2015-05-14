@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+    </h:head>
+    <h:body>
+        Hello from Facelets
+        <br />
+
+        <h:outputLabel value ="Welcome:  #{LoginController.getWelcome()}"></h:outputLabel>
+            <br />
+            <br/>
+            <br />
+        <h:link outcome="/test/admins/List" value="Show All Admins Items"/>
+        <br />
+        <h:link outcome="/test/company/List" value="Show All Company Items"/>
+        <br />
+        <h:link outcome="/test/doctors/List" value="Show All Doctors Items"/>
+        <br />
+        <h:link outcome="/test/income/List" value="Show All Income Items"/>
+        <br />
+        <h:link outcome="/test/reservations/List" value="Show All Reservations Items"/>
+        <br />
+        <h:link outcome="/test/rooms/List" value="Show All Rooms Items"/>
+        <br />
+        <h:link outcome="/test/users/List" value="Show All Users Items"/>
+    </h:body>
+
+
+
+
+
+
+
+</html>
+

@@ -16,23 +16,29 @@
         </style>
     </h:head>
     <h:body>
+
         <h:form id="form">
             <p:growl id="msgs" showDetail="true" />
 
-         
-    <h:panelGrid columns="2" cellpadding="5">
-    <p:outputLabel for="datetime" value="Datetime:" />
-    <p:calendar id="datetime" value="#{DoctorPanel.reservationDate}" pattern="MM/dd/yyyy HH:mm:ss" />
 
-    <p:outputLabel for ="room" value="Room:" />
-    <p:inputText id="room" value="#{DoctorPanel.room}"/>
-    </h:panelGrid>
-            <p:commandButton value="Submit" update="msgs" actionListener="#{DoctorPanel.createReservationDate()}" icon="ui-icon-check" />
+            <h:panelGrid columns="2" cellpadding="5">
+                <p:outputLabel for="datetime" value="Datetime:" />
+                <p:calendar id="datetime" value="#{DoctorPanel.reservationDate}" pattern="MM/dd/yyyy HH:mm:ss" />
+
+                <p:outputLabel for="room" value="Room: " />
+            <p:selectOneMenu id="room" value="#{DoctorPanel.roomname}" style="width:250px">
+                <f:selectItem itemLabel="Select Room" itemValue="" noSelectionOption="false" />
+                <f:selectItems value="#{DoctorPanel.rooms}" />
+            </p:selectOneMenu>
+            
+            </h:panelGrid>
+            <p:commandButton value="Submit" update="msgs" actionListener="#{DoctorPanel.createReservationDate}" icon="ui-icon-check" />
 
             <p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
 
             </p:dialog>
         </h:form>
+
     </h:body>
 </html>
 

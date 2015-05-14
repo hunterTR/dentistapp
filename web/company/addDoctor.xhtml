@@ -1,16 +1,60 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <style>
+            .ui-widget-header .ui-inputfield, .ui-widget-content .ui-inputfield{
+                background: whitesmoke;
+                -moz-box-shadow: inset 0 2px 2px #8f8f8f;
+                -webkit-box-shadow: inset 0 2px 2px #8f8f8f;
+                box-shadow: inset 0 2px 2px #8f8f8f;
+                color: darkslategray;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:dataTable var="user" value="#{CompanyPanel.users}" widgetVar="usersTable"
+                 emptyMessage="No users found with given criteria" filteredValue="#{CompanyPanel.filteredUsers}">
+ 
+        <f:facet name="header">
+            <p:outputPanel>
+                <h:outputText value="Search all fields:" />
+                <p:inputText id="globalFilter" onkeyup="PF('usersTable').filter()" style="width:150px" placeholder="Enter keyword"/>
+            </p:outputPanel>
+        </f:facet>
+ \
+ 
+                <p:column filterBy="#{user.name}" headerText="Name" footerText="in" filterMatchMode="contains">
+           
+            <h:outputText value="#{user.name}" />
+        </p:column>
+ 
+        <p:column filterBy="#{user.email}" headerText="Email" footerText="in" filterMatchMode="contains">
+         
+            <h:outputText value="#{user.email}" />
+        </p:column>
+ 
+        <p:column headerText="Phone" >
+   
+            <h:outputText value="#{user.phone}" />
+        </p:column>
+ 
+                <p:column headerText="Address">
+       
+            <h:outputText value="#{user.address}" />
+        </p:column>
+ 
+        <p:column headerText="Doctor">
+                    <p:commandButton value="Assign" actionListener="#{CompanyPanel.assignDoctor(user.userid)}" icon="ui-icon-check" />
+                </p:column>
+    </p:dataTable>
+</h:form>
+        
+
+    </h:body>
 </html>
+

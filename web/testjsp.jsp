@@ -19,9 +19,14 @@
 				<h:outputText value="Enter your Password: "></h:outputText>
 				<h:inputSecret value="#{LoginController.password}"></h:inputSecret>
 				
+                                
 				
 				<h:commandButton action="#{LoginController.Authentication}" value="#{LoginController.buttonName()}"></h:commandButton>
 			</h:panelGrid>
+                        
+                        <p:messages id="msg" showDetail="true" closable="true" globalOnly="false" autoUpdate="true" >
+                    <p:effect type="bounce" event="load" delay="0" />
+                </p:messages>
 		</h:form>
 	</f:view>
 </body>

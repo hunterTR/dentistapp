@@ -93,14 +93,26 @@ public class Util {
         else
         return false;
     }
+    
+    public static boolean isCompany() {
+        HttpSession session = (HttpSession) FacesContext.
+                getCurrentInstance().
+                getExternalContext().
+                getSession(false);
 
-    public static String getUserId() {
+        if ( session.getAttribute("company") !=null)
+        return (boolean) session.getAttribute("company");
+        else
+        return false;
+    }
+
+    public static int getUserId() {
 
         HttpSession session = getSession();
         if (session != null) {
-            return (String) session.getAttribute("userid");
+            return (int)session.getAttribute("userid");
         } else {
-            return null;
+            return 0;
         }
     }
 

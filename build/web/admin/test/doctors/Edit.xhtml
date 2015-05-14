@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DoctorsEditDlg" widgetVar="DoctorsEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditDoctorsTitle}">
+            <h:form id="DoctorsEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{doctorsController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditDoctorsLabel_doctorid}" for="doctorid" />
+                        <p:inputText id="doctorid" value="#{doctorsController.selected.doctorid}" title="#{bundle.EditDoctorsTitle_doctorid}" required="true" requiredMessage="#{bundle.EditDoctorsRequiredMessage_doctorid}"/>
+                        <p:outputLabel value="#{bundle.EditDoctorsLabel_companyid}" for="companyid" />
+                        <p:inputText id="companyid" value="#{doctorsController.selected.companyid}" title="#{bundle.EditDoctorsTitle_companyid}" />
+                        <p:outputLabel value="#{bundle.EditDoctorsLabel_userid}" for="userid" />
+                        <p:inputText id="userid" value="#{doctorsController.selected.userid}" title="#{bundle.EditDoctorsTitle_userid}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{doctorsController.update}" value="#{bundle.Save}" update="display,:DoctorsListForm:datalist,:growl" oncomplete="handleSubmit(args, 'DoctorsEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DoctorsEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

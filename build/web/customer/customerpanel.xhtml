@@ -17,7 +17,7 @@
     </h:head>
     <h:body>
 
-        <br />
+          <br />
 
         <h:outputLabel value ="Welcome: #{CustomerPanel.name}"></h:outputLabel>
         <br />
@@ -37,31 +37,31 @@
 
     <h:form id="form2">
 
-        <p:carousel value="#{CustomerPanel.reservationList}" headerText="Appointments" var="reservation" itemStyleClass="carItem">
+        <p:carousel value="#{CustomerPanel.reservationsList}" headerText="Appointments" var="reservation" itemStyleClass="carItem">
             <h:panelGrid columns="2" style="width:100%" cellpadding="5" columnClasses="label,value">
                 <f:facet name="header">
 
                 </f:facet>
 
                 <h:outputText value="Hospital" />
-                <h:outputText value="#{reservation.companyName}" />
+                <h:outputText value="#{reservation.company.companyname}" />
                 
                 <h:outputText value="Room Number" />
-                <h:outputText value="#{reservation.room}" />
+                <h:outputText value="#{reservation.room.roomname}" />
 
                 <h:outputText value="Date" />
                 <h:outputText value="#{reservation.date}" />
 
                 <h:outputText value="Doctor Name" />
-                <h:outputText value="#{reservation.doctorName}"/>
+                <h:outputText value="#{reservation.doctor.getName()}"/>
 
                 <h:outputText value="Type" />
-                <h:outputText value="#{reservation.type}" />
+                <h:outputText value="#Treatment A" />
 
                 <h:outputText value="Cost" />
-                <h:outputText value="#{reservation.cost} TL" />
+                <h:outputText value="100 TL" />
 
-                <h:commandButton value="Cancel" actionListener="#{CustomerPanel.deleteReservationDate(reservation.reservationID)}"> </h:commandButton>
+                <h:commandButton value="Cancel" actionListener="#{CustomerPanel.deleteReservation(reservation.reservationid)}"> </h:commandButton>
             </h:panelGrid>
 
             <f:facet name="footer">

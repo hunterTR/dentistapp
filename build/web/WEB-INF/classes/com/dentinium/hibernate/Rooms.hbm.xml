@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 9, 2015 1:08:48 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.dentinium.hibernate.Rooms" table="ROOMS" schema="APP" optimistic-lock="version">
+        <id name="roomid" type="int">
+            <column name="ROOMID" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="doctor" column="DOCTORS" class="com.dentinium.hibernate.Doctors" not-null="true"/>
+        
+        <property name="roomname" type="string">
+            <column name="ROOMNAME" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AdminsViewDlg" widgetVar="AdminsViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewAdminsTitle}">
+            <h:form id="AdminsViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{adminsController.selected != null}">
+                        <h:outputText value="#{bundle.ViewAdminsLabel_adminid}"/>
+                        <h:outputText value="#{adminsController.selected.adminid}" title="#{bundle.ViewAdminsTitle_adminid}"/>
+                        <h:outputText value="#{bundle.ViewAdminsLabel_userid}"/>
+                        <h:outputText value="#{adminsController.selected.userid}" title="#{bundle.ViewAdminsTitle_userid}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="AdminsViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

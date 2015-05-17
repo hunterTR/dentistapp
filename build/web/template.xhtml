@@ -1,48 +1,215 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
-
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title><ui:insert name="title">Default Title</ui:insert></title>
-        <h:outputStylesheet library="css" name="jsfcrud.css"/>
-        <h:outputScript library="js" name="jsfcrud.js"/>
-    </h:head>
+        <title>Dentinium</title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+        <meta charset="utf-8"/>
+        <meta charset="utf-8"/>
 
+        <link href='http://fonts.googleapis.com/css?family=Anton' rel='stylesheet' type='text/css'/>
+        <link href='http://fonts.googleapis.com/css?family=Archivo Narrow' rel='stylesheet' type='text/css'/>
+        <link rel="stylesheet" href="css/odevbjqs.css"/>
+        <link rel="stylesheet" type="text/css" href="css/odevcomponent.css" />
+        <link rel="stylesheet" href="css/odevstyle1.css"/> 
+        <link rel="stylesheet" href="css/odevyeni.css"/>
+        <script src="js/modernizr.js"></script> 
+        <script src="js/bjqs-1.3.min.js"></script>
+
+
+        <style type="text/css">
+            .ui-carousel .ui-carousel-header {
+                margin: 0 1px;
+                height: 30px!important;
+                overflow: hidden;
+                padding-top: 7px;
+                padding-bottom: 8px;
+                padding-right: 10px;
+                padding-left: 10px;
+            }
+        </style>  
+    </h:head>
     <h:body>
 
-        <p:growl id="growl" life="3000" />
+        <h:form>            
 
-        <p:layout fullPage="true">
-            <p:layoutUnit position="north" size="65" header="#{bundle.AppName}">
-                <h:form id="menuForm">
-                    <p:menubar>
-                        <p:menuitem value="#{bundle.Home}" outcome="/index" icon="ui-icon-home"/>
-                        <p:submenu label="#{bundle.Maintenance}">
-                            <p:menuitem value="Admins" outcome="/test/admins/List.xhtml" />
-                            <p:menuitem value="Company" outcome="/test/company/List.xhtml" />
-                            <p:menuitem value="Doctors" outcome="/test/doctors/List.xhtml" />
-                            <p:menuitem value="Income" outcome="/test/income/List.xhtml" />
-                            <p:menuitem value="Reservations" outcome="/test/reservations/List.xhtml" />
-                            <p:menuitem value="Rooms" outcome="/test/rooms/List.xhtml" />
-                            <p:menuitem value="Users" outcome="/test/users/List.xhtml" />
-                        </p:submenu>
-                    </p:menubar>
-                </h:form>
-            </p:layoutUnit>
 
-            <p:layoutUnit position="south" size="60">
-                <ui:insert name="footer"/>
-            </p:layoutUnit>
+            <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
 
-            <p:layoutUnit position="center">
-                <ui:insert name="body"/>
-            </p:layoutUnit>
+            <p:dialog header="Login" widgetVar="dlg" resizable="false" >
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputLabel for="username" value="Username:" />
+                    <p:inputText id="username" value="#{LoginController.username}" required="true" label="username" />
 
-        </p:layout>
+                    <h:outputLabel for="password" value="Password:" />
+                    <p:password id="password" value="#{LoginController.password}" required="true" label="password" />
 
+                    <f:facet name="footer">
+                        <p:commandButton value="Login" update="growl" actionListener="#{LoginController.login}"
+                                         oncomplete="handleLoginRequest(xhr, status, args)" />
+                    </f:facet>  
+                </h:panelGrid>
+            </p:dialog>
+        </h:form>
+
+
+        <script type="text/javascript">
+            function handleLoginRequest(xhr, status, args) {
+                if (args.validationFailed || !args.loggedIn) {
+                    PF('dlg').jq.effect("shake", {times: 5}, 100);
+                }
+                else {
+                    PF('dlg').hide();
+                    $('#loginLink').fadeOut();
+                }
+            }
+        </script>
+
+        <div style = "z-index: -1">
+            <h:panelGroup rendered="#{!LoginController.isLoggedIn}" >
+                <div class="header">
+
+                    <div class="container">
+
+                        <div class="sagUst">
+                            <ul>
+                                <li> HAVE AN ACCOUNT? </li>
+                                <li> <a href="#" onclick="PF('dlg').show();"> SIGN IN </a> </li>
+                                <li> OR </li>
+                                <li> <a href="faces/signup.xhtml"> SIGN UP </a> </li>
+                            </ul>
+                        </div>
+                    </div>    
+
+                </div>
+            </h:panelGroup>
+            <h:outputLabel value ="Welcome:  #{LoginController.getWelcome()}"></h:outputLabel>
+            <h:form>
+                <h:commandButton value="login" onclick="PF('dlg').show();" rendered = "#{!LoginController.isLoggedIn}" ></h:commandButton>
+                <h:commandButton value="logout" actionListener="#{LoginController.logout}" rendered = "#{LoginController.isLoggedIn}" ></h:commandButton>
+                <h:button value="Doctor Panel" outcome="doctorpanel.xhtml" rendered ="#{LoginController.isdoctor}"></h:button>
+                <h:button value="Customer Panel" outcome="customerpanel.xhtml"></h:button>
+                <h:button value="Admin Panel" outcome="adminpanel.xhtml"  rendered ="#{LoginController.isadmin}" ></h:button>
+                <h:button value="Company Panel" outcome="companypanel.xhtml" rendered ="#{LoginController.isdoctor}" ></h:button>
+            </h:form>
+            <div class="headerRow">
+                <div class="logo">
+                    <img src="images/dentinium-logo.png"/>
+                </div>
+                <div class="search">
+                    <input class="arama " type="text" />
+                    <input class="submit" type="submit" value="Arama"/>
+                </div>
+                <div class="topresim">
+                    <img src="images/sag_ust.png"/>
+                </div>
+                <div class="topresim2">
+                    <img src="images/sag_ust_ust.png"/>
+                </div>
+
+            </div>
+            <div class="clear"></div>
+            <section class="color-4">
+                <nav class="cl-effect-6">
+                    <a href="index.html">ANASAYFA</a>
+                    <a href="#">KURUMSAL</a>
+                    <a href="#">HİZMETLERİMİZ</a>
+                    <a href="#">PERSONEL</a>
+                    <a href="#">DUYURULAR</a>
+                    <a href="#">İLETİŞİM</a>
+                </nav>
+            </section>
+            <div class="clear"></div>
+            <div id="banner-fade">
+                <ul class="bjqs">
+                    <li><img src="images/banner1.jpg" /></li>
+                    <li><img src="images/banner2.jpg" /></li>
+                    <li><img src="images/banner3.jpg"/> ></li>
+                    <li><img src="images/banner4.jpg" /></li>
+                </ul>
+            </div>
+            <div class="container">
+
+                    <h:form>
+    <p:growl id="msgs" showDetail="true" />
+    <p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
+
+        </p:dialog>
+    <p:panel header="Make an Appointment" style="margin-bottom:10px;">
+        <h:panelGrid columns="2" cellpadding="5">
+            <p:outputLabel for="company" value="Company " />
+            <p:selectOneMenu id="company" value="#{AppointmentBean.company}" style="width:250px">
+                <p:ajax listener="#{AppointmentBean.onCompanyChange}" update="doctor" />
+                <f:selectItem itemLabel="Any Hospital" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{AppointmentBean.companies}" />
+            </p:selectOneMenu>
+ 
+            <p:outputLabel for="doctor" value="Doctor: " />
+            <p:selectOneMenu id="doctor" value="#{AppointmentBean.doctor}" style="width:250px">
+                <p:ajax listener="#{AppointmentBean.onDoctorChange}" update="reservationDate" />
+                <f:selectItem itemLabel="Select Doctor" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{AppointmentBean.doctors}" />
+            </p:selectOneMenu>
+            
+            <p:outputLabel for="treatment" value="Treatment: " />
+            <p:selectOneMenu id="treatment" value="#{AppointmentBean.treatment}" style="width:250px">
+                <f:selectItem itemLabel="Select Treatment" itemValue="" noSelectionOption="false" />
+                <f:selectItems value="#{AppointmentBean.treatments}" />
+            </p:selectOneMenu>
+            
+             <p:outputLabel for="reservationDate" value="Appointment Date: " />
+             <p:selectOneMenu id="reservationDate" value="#{AppointmentBean.reservationID}" style="width:250px">
+                <f:selectItem itemLabel="Select Date" itemValue="" noSelectionOption="false" />
+                <f:selectItems value="#{AppointmentBean.reservationDates}" />
+            </p:selectOneMenu>
+            
+            
+        </h:panelGrid>
+ 
+        <p:separator />
+ 
+        <p:commandButton value="Submit" update="msgs" actionListener="#{AppointmentBean.makeAppointment}" icon="ui-icon-check" />
+    </p:panel>
+</h:form>
+        
+        
+
+
+            </div>
+
+            <div class="footer">
+                <div class="container">
+                    <div class="footergif">
+                        <a href="#"> <img src="images/dentinium-logofooter.png"/> </a>
+                    </div>
+                    <div class="footeryazi">
+                        <small> © 2015 | </small>
+                    </div>
+
+                    <div class="footerlink">
+                        <small>    <a href="#"> PRIVACY POLICY</a></small>
+                    </div>
+                    <div class="footersag">
+                        <img src="images/footerlink.png"/>
+                    </div>
+                </div>
+
+            </div>
+            <a href="#0" class="cd-top"></a>  
+
+            <script>
+
+            </script>
+
+            <script src="js/main.js"></script> 
+        </div>
     </h:body>
 
+
+
+
 </html>
+

@@ -113,7 +113,7 @@ public class IncomeDataController {
     public void deleteIncome() {
 
     }
-    
+   
     
     public List<Income> getIncomesByCompany(String companyname)
     { 

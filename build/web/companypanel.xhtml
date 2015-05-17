@@ -9,16 +9,28 @@
         <h:outputStylesheet name="css/jsfcrud.css"/>
         <meta charset="utf-8"/>
         <meta charset="utf-8"/>
-        <link rel="stylesheet" href="css/odevyeni.css"/>
+
         <link href='http://fonts.googleapis.com/css?family=Anton' rel='stylesheet' type='text/css'/>
         <link href='http://fonts.googleapis.com/css?family=Archivo Narrow' rel='stylesheet' type='text/css'/>
         <link rel="stylesheet" href="css/odevbjqs.css"/>
         <link rel="stylesheet" type="text/css" href="css/odevcomponent.css" />
         <link rel="stylesheet" href="css/odevstyle1.css"/> 
-
+        <link rel="stylesheet" href="css/odevyeni.css"/>
         <script src="js/modernizr.js"></script> 
         <script src="js/bjqs-1.3.min.js"></script>
 
+
+        <style type="text/css">
+            .ui-carousel .ui-carousel-header {
+                margin: 0 1px;
+                height: 30px!important;
+                overflow: hidden;
+                padding-top: 7px;
+                padding-bottom: 8px;
+                padding-right: 10px;
+                padding-left: 10px;
+            }
+        </style>  
     </h:head>
     <h:body>
 
@@ -57,10 +69,10 @@
         </script>
 
         <div style = "z-index: -1">
-            <div class="header">
+             <div class="header">
+                <h:panelGroup rendered="#{!LoginController.isLoggedIn}" >
+                    <div class="container">
 
-                <div class="container">
-                    <h:panelGroup rendered="#{!LoginController.isLoggedIn}" >
                         <div class="sagUst">
                             <ul>
                                 <li> HAVE AN ACCOUNT? </li>
@@ -69,23 +81,12 @@
                                 <li> <a href="faces/signup.xhtml"> SIGN UP </a> </li>
                             </ul>
                         </div>
-                    </h:panelGroup>
-                    <h:panelGroup rendered="#{LoginController.isLoggedIn}" >
-                        <div class="sagUst">
-                            <ul>
-                                <li>  </li>
-                                <li> <a href="faces/takeappointment.xhtml"> TAKE APPOINTMENT </a> </li>
-                                <li> OR </li>
-                                <li>  <h:form>    <h:commandButton value="logout" actionListener="#{LoginController.logout}" rendered = "#{LoginController.isLoggedIn}" ></h:commandButton>   </h:form></li>
-                            </ul>
-                        </div>
-                    </h:panelGroup>
-                </div>    
-
+                    </div>    
+                </h:panelGroup>
                 <h:outputLabel value ="Welcome:  #{LoginController.getWelcome()}" styleClass="textLogin"></h:outputLabel>
                 <h:form>
 
-
+                    <h:commandButton value="logout" actionListener="#{LoginController.logout}" rendered = "#{LoginController.isLoggedIn}" ></h:commandButton>
                     <h:button value="Doctor Panel" outcome="doctorpanel.xhtml" rendered ="#{LoginController.isdoctor}"></h:button>
                     <h:button value="Customer Panel" outcome="customerpanel.xhtml"></h:button>
                     <h:button value="Admin Panel" outcome="adminpanel.xhtml"  rendered ="#{LoginController.isadmin}" ></h:button>
@@ -120,89 +121,127 @@
                 </nav>
             </section>
             <div class="clear"></div>
-            <div id="banner-fade">
-                <ul class="bjqs">
-                    <li><img src="images/banner1.jpg" /></li>
-                    <li><img src="images/banner2.jpg" /></li>
-                    <li><img src="images/banner3.jpg"/> ></li>
-                    <li><img src="images/banner4.jpg" /></li>
-                </ul>
-            </div>
+          
             <div class="container">
 
-                <h2>Registration Form</h2>
-                <h:form>
-                    <p:fieldset legend="Registration Form" widgetVar="regWidget" style="width: 600px;">
-                        <h:panelGrid columns="3" width="550" border="0">
-                            <h:outputLabel value="Username" />
-                            <p:inputText value="#{registrationBean.registrationForm.userName}" 
-                                         id="userName"
-                                         required="true" 
-                                         requiredMessage="UserName is required"
-                                         validatorMessage="UsesrName should be of length from 5 to 15 chars"
-                                         >
-                                <f:validateLength minimum="5" maximum="15" for="userName"></f:validateLength>
-                            </p:inputText>
-                            <p:message for="userName"/>
+
+        <h:outputLabel value ="#{CompanyPanel.name}"></h:outputLabel>
+        <br />
+
+        <h:form id="form">
+            <p:growl id="msgs" showDetail="true" />
+
+            <p:button value="Add Doctor"  outcome="addDoctor.xhtml" icon="ui-icon-star"  />
+
+          
+             <p:commandButton  value="Register In" onclick="PF('registerDlg').show();" icon="ui-icon-star"/>   
+                    
+  <p:button value="Get Finance Report"  outcome="finance.xhtml" icon="ui-icon-star"  />
+            <p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
+
+            </p:dialog>
+            
+        </h:form>
+
+        <br />  
+
+        <h:form id="form2">
+
+            <p:carousel value="#{CompanyPanel.doctors}" headerText="Doctors" var="doctor" itemStyleClass="doctorItem">
+                <h:panelGrid columns="2" style="width:100%" cellpadding="5" columnClasses="label,value">
+                    <f:facet name="header">
+
+                    </f:facet>
+
+                    <h:outputText value="Name" />
+                    <h:outputText value="#{doctor.user.username}" />
+
+                    <h:outputText value="E-mail" />
+                    <h:outputText value="#{doctor.user.email}" />
+
+                    <h:outputText value="Phone" />
+                    <h:outputText value="#{doctor.user.phone}" />
+
+                    <h:outputText value="wage" />
+                    <h:outputText value="10000 TL"/>
+
+                    <h:commandButton value="Delete" actionListener="#{CompanyPanel.deleteDoctor(doctor.doctorid)}"> </h:commandButton>
+
+                </h:panelGrid>
+
+                <f:facet name="footer">
+
+                </f:facet>
+            </p:carousel>
+        </h:form>
+
+        <br />  
+
+        <h:form id = "corouselform">
+
+            <p:carousel id="appointments" value="#{CompanyPanel.reservationsList}" headerText="Appointments" var="reservation" itemStyleClass="carItem">
+                <h:panelGrid columns="2" style="width:100%" cellpadding="5" columnClasses="label,value">
+                    <f:facet name="header">
+
+                    </f:facet>
+                    <h:outputText value="Doctor Name" />
+                    <h:outputText value="#{reservation.doctor.user.name}"/>
+
+                    <h:outputText value="Room Number" />
+                    <h:outputText value="#{reservation.room.roomname}" />
+
+                    <h:outputText value="Date" />
+                    <h:outputText value="#{reservation.date}" />
+
+                    <h:outputText value="Patient Name" />
+                    <h:outputText value="#{reservation.user.name}" />
+
+                    <h:outputText value="Treatment" />
+                    <h:outputText value="Treatment A" />
+
+                    <h:outputText value="Cost" />
+                    <h:outputText value="#{reservation.cost} TL" />
+
+                    <h:commandButton value="Cancel" actionListener="#{CompanyPanel.deleteReservation(reservation.reservationid)}">
+                    </h:commandButton>
+
+              
+                    <p:commandButton  value="Done" oncomplete="PF('dlg3').show();">   
+                        <f:setPropertyActionListener value="#{reservation}" target="#{CompanyPanel.selectedReservation}" />
+                    </p:commandButton>
 
 
-                            <h:outputLabel value="Password" />
-                            <p:password value="#{registrationBean.registrationForm.password}"
-                                        id="password"
-                                        required="true" 
-                                        requiredMessage="Password is required"
-                                        validatorMessage="Password should be of length from 5 to 15 chars"
-                                        >
-                                <f:validateLength minimum="5" maximum="15" for="password"></f:validateLength>
-                            </p:password>
-                            <p:message for="password" />
+                </h:panelGrid>
 
-                            <h:outputLabel value="Name" />
-                            <p:inputText value="#{registrationBean.registrationForm.name}"
-                                         id="name"
-                                         required="true" 
-                                         requiredMessage="Name is required"
-                                         validatorMessage="Name should be of length from 5 to 15 chars"
-                                         >
-                                <f:validateLength minimum="5" maximum="15" for="name"></f:validateLength>
-                            </p:inputText>
-                            <p:message for="name" />
+                <f:facet name="footer">
 
+                </f:facet>
+            </p:carousel>
 
-                            <h:outputLabel value="Email" />
-                            <p:inputText value="#{registrationBean.registrationForm.email}"
-                                         id="email"
-                                         validatorMessage="Invalid Email">
-                                <f:validateRegex pattern="[a-zA-Z0-9]+@[a-zA-Z]+.[a-zA-Z]{2,3}"></f:validateRegex>   
-                            </p:inputText>
-                            <p:message for="email" />
-
-                            <h:outputLabel value="Phone" />
-                            <p:inputText value="#{registrationBean.registrationForm.phone}"
-                                         id="phone"></p:inputText>
-                            <p:message for="phone" />
-
-                            <h:outputLabel value="DOB" />
-                            <p:calendar value="#{registrationBean.registrationForm.dob}"
-                                        id="dob"
-                                        converterMessage="Invalid Date"
-                                        pattern="dd-MM-yyyy">
-
-                            </p:calendar>
-                            <p:message for="dob" />
-
-                            <h:outputLabel value="Address" />
-                            <p:inputText value="#{registrationBean.registrationForm.address}"
-                                         id="address"></p:inputText>
-                            <p:message for="address" />
+        </h:form>
 
 
 
-                            <p:commandButton value="Register" action="#{registrationBean.register}" ajax="false"></p:commandButton>
-                        </h:panelGrid>
-                    </p:fieldset>
 
-                </h:form>
+        <p:dialog header="Done" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" height="100">
+            <h:form id = "doneIncome">
+                <p:outputLabel value="Total Amount"></p:outputLabel>
+                <p:inputText value="#{CompanyPanel.reservationIncome}" />
+                <p:commandButton value="OK" type="submit" oncomplete="PF('dlg3').hide();" actionListener="#{CompanyPanel.reservationDone(CompanyPanel.selectedReservation.reservationid)}" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+            </h:form>
+        </p:dialog>
+        
+        <p:dialog header="Register" widgetVar="registerDlg" showEffect="explode" hideEffect="bounce" height="100">
+            <h:form id = "registerPush">
+                <p:outputLabel value="Total Amount"></p:outputLabel>
+                <p:inputText value="#{CompanyPanel.reservationIncome}" />
+                <p:outputLabel value="Description"></p:outputLabel>
+                <p:inputText value="#{CompanyPanel.registerDescription}" />
+                
+                <p:commandButton value="OK" type="submit" oncomplete="PF('registerDlg').hide();" actionListener="#{CompanyPanel.registerIn()}" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+            </h:form>
+        </p:dialog>
+    
 
 
             </div>

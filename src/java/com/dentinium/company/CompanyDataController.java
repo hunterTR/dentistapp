@@ -48,7 +48,7 @@ public class CompanyDataController {
         List companies = query.list();
 
         if (companies.size() >= 1) {
-            session.close();
+          
             return companies;
         } else {
 
@@ -56,11 +56,16 @@ public class CompanyDataController {
             session.close();
             return null;
         }
+        
     }
 
     public Session createSession() {
         SessionFactory factory = new Configuration().configure().buildSessionFactory();
         return factory.openSession();
     }
+    
+    
+    
+    
 
 }

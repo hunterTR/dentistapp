@@ -21,25 +21,9 @@
 
     </h:head>
     <h:body>
-        Hello from Facelets
-        <br />
-
-        <h:outputLabel value ="Welcome:  #{LoginController.getWelcome()}"></h:outputLabel>
-        <br />
-        <h:commandButton value="login" onclick="PF('dlg').show();" rendered = "#{!LoginController.isLoggedIn}" ></h:commandButton>
-
-        <h:button value="Doctor Panel" outcome="doctor/doctorpanel.xhtml" rendered ="#{LoginController.isdoctor}"></h:button>
-        <h:button value="Customer Panel" outcome="customer/customerpanel.xhtml"></h:button>
-        <h:button value="Admin Panel" outcome="admin/adminpanel.xhtml"  rendered ="#{LoginController.isadmin}" ></h:button>
-        <h:button value="Company Panel" outcome="company/companypanel.xhtml" ></h:button>
-        <br/>
-        <br />
 
         <h:form>            
-            <h:commandButton value="logout" actionListener="#{LoginController.logout}" rendered = "#{LoginController.isLoggedIn}" ></h:commandButton>
-            <h:outputLink value="javascript:void(0)" onclick="PF('dlg').show();" title="login">
-                <p:graphicImage name="/images/login.png" />
-            </h:outputLink>
+
 
             <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
 
@@ -58,7 +42,7 @@
                 </h:panelGrid>
             </p:dialog>
         </h:form>
-        
+
 
         <script type="text/javascript">
             function handleLoginRequest(xhr, status, args) {
@@ -73,202 +57,217 @@
         </script>
 
         <div style = "z-index: -1">
-        <div class="header">
-            <div class="container">
-                <div class="sagUst">
-                    <ul>
-                        <li> HAVE AN ACCOUNT? </li>
-                        <li> <a href="#" onclick="PF('dlg').show();"> SIGN IN </a> </li>
-                        <li> OR </li>
-                        <li> <a href="faces/signup.xhtml"> SIGN UP </a> </li>
-                    </ul>
-                </div>
-            </div>    
-        </div>
-        <div class="headerRow">
-            <div class="logo">
-                <img src="images/dentinium-logo.png"/>
-            </div>
-            <div class="search">
-                <input class="arama " type="text" />
-                <input class="submit" type="submit" value="Arama"/>
-            </div>
-            <div class="topresim">
-                <img src="images/sag_ust.png"/>
-            </div>
-            <div class="topresim2">
-                <img src="images/sag_ust_ust.png"/>
+
+            <div class="header">
+                <h:panelGroup rendered="#{!LoginController.isLoggedIn}" >
+                    <div class="container">
+
+                        <div class="sagUst">
+                            <ul>
+                                <li> HAVE AN ACCOUNT? </li>
+                                <li> <a href="#" onclick="PF('dlg').show();"> SIGN IN </a> </li>
+                                <li> OR </li>
+                                <li> <a href="faces/signup.xhtml"> SIGN UP </a> </li>
+                            </ul>
+                        </div>
+                    </div>    
+                </h:panelGroup>
+                <h:outputLabel value ="Welcome:  #{LoginController.getWelcome()}" styleClass="textLogin"></h:outputLabel>
+                <h:form>
+
+                    <h:commandButton value="logout" actionListener="#{LoginController.logout}" rendered = "#{LoginController.isLoggedIn}" ></h:commandButton>
+                    <h:button value="Doctor Panel" outcome="doctorpanel.xhtml" rendered ="#{LoginController.isdoctor}"></h:button>
+                    <h:button value="Customer Panel" outcome="customerpanel.xhtml"></h:button>
+                    <h:button value="Admin Panel" outcome="adminpanel.xhtml"  rendered ="#{LoginController.isadmin}" ></h:button>
+                    <h:button value="Company Panel" outcome="companypanel.xhtml" rendered ="#{LoginController.isdoctor}" ></h:button>
+                </h:form>
             </div>
 
-        </div>
-        <div class="clear"></div>
-        <section class="color-4">
-            <nav class="cl-effect-6">
-                <a href="index.html">ANASAYFA</a>
-                <a href="#">KURUMSAL</a>
-                <a href="#">HİZMETLERİMİZ</a>
-                <a href="#">PERSONEL</a>
-                <a href="#">DUYURULAR</a>
-                <a href="#">İLETİŞİM</a>
-            </nav>
-        </section>
-        <div class="clear"></div>
-        <div id="banner-fade">
-            <ul class="bjqs">
-                <li><img src="images/banner1.jpg" /></li>
-                <li><img src="images/banner2.jpg" /></li>
-                <li><img src="images/banner3.jpg"/> ></li>
-                <li><img src="images/banner4.jpg" /></li>
-            </ul>
-        </div>
-        <div class="container">
-            <div class="yazi1">
-                <h4>a driving force in your business.</h4>
-                <div class="yazi1alt">
-                    <h5>Lorem ipsum dolor sit amet, conEncididunt ut labore ete doloremagna aliqua. </h5>
-                </div>
-            </div>
-            <div class="yazi2">
-                <div class="resim">
-                    <img src="images/img1.png"/>
-                </div>
-                <div class="welcome">
-                    <h3>welcome!</h3>
-                </div>
-                <div class="text">
-                    <h4>Our company gives you an access to the world of ideal solutions, real professionals, and unique possibilities.                     </h4>
-                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamcode laboris nisi dolore massa. Et aliquipx eato                              commodo consequataute irure dolor inreprehendolore eu fugiat nulla pariatu xcepteur sint occaecat.cupidatat                            nproident. sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
-                    <p> </p>
-                </div>    
-            </div>
-            <div class="yazi3">
-                <div class="whatwedo">
-                    <h3>what we do</h3>
-                    <ul>
-                        <li> <a href="#">Business continuity  resiliency</a></li>
-                        <li> <a href="#">Cloud Computing</a></li>
-                        <li> <a href="#">Data center services</a>  </li>
-                        <li> <a href="#">Mobility</a></li>
-                        <li> <a href="#">Security services</a></li>
-                        <li> <a href="#">Strategy and design services</a></li>
-                        <li> <a href="#">Technical support services</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
 
+            <div class="headerRow">
+                <div class="logo">
+                    <img src="images/dentinium-logo.png"/>
+                </div>
+                <div class="search">
+                    <input class="arama " type="text" />
+                    <input class="submit" type="submit" value="Arama"/>
+                </div>
+                <div class="topresim">
+                    <img src="images/sag_ust.png"/>
+                </div>
+                <div class="topresim2">
+                    <img src="images/sag_ust_ust.png"/>
+                </div>
+
+            </div>
             <div class="clear"></div>
-
-
-            <div class="sol">
-                <div class="soltop">
-                    <h3>news and events</h3>
-                </div>
-                <div class="solorta">
-                    <div class="solortaresim">
-                        <img src="images/file.png"/>
-                    </div>
-
-                    <div class="solortabaslik">
-                        <a href="#"> MAR. 19.2015.</a>
-                        <div class="solortabaslikalt">   
-                            <p>Sui blanditiistes es praetiuptatum delenitimos atququdolores etres quamolestiasexceuri sint piditaprdentimilique. </p>
-                        </div>
-                    </div>
-                    <div class="clear"></div>
-
-                    <div class="solortaresim">
-                        <img src="images/file.png"/>
-                    </div>
-
-                    <div class="solortabaslik ">
-                        <a href="#"> MAR. 19.2015.</a>
-                        <div class="solortabaslikalt">   
-                            <p>Sui blanditiistes es praetiuptatum delenitimos atququdolores etres quamolestiasexceuri sint piditaprdentimilique. </p>
-                        </div>
-                    </div>
-                    <div class="clear"></div>
-                    <div class="solortaresim">
-                        <img src="images/file.png"/>
-                    </div>
-
-                    <div class="solortabaslik">
-                        <a href="#"> MAR. 19.2015.</a>
-                        <div class="solortabaslikalt">   
-                            <p>Sui blanditiistes es praetiuptatum delenitimos atququdolores etres quamolestiasexceuri sint piditaprdentimilique. </p>
-                        </div>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-                <div>
-                    <input type="submit" class="moreButton" value="MORE" />
-                </div>
-                <div class="clear"></div> 
+            <section class="color-4">
+                <nav class="cl-effect-6">
+                    <a href="index.xhtml">ANASAYFA</a>
+                    <a href="#">KURUMSAL</a>
+                    <a href="#">HİZMETLERİMİZ</a>
+                    <a href="#">PERSONEL</a>
+                    <a href="#">DUYURULAR</a>
+                    <a href="#">İLETİŞİM</a>
+                </nav>
+            </section>
+            <div class="clear"></div>
+            <div id="banner-fade">
+                <ul class="bjqs">
+                    <li><img src="images/banner1.jpg" /></li>
+                    <li><img src="images/banner2.jpg" /></li>
+                    <li><img src="images/banner3.jpg"/> ></li>
+                    <li><img src="images/banner4.jpg" /></li>
+                </ul>
             </div>
-            <div class="sag">
-                <div class="sagtop">
-                    <h3>featured offers</h3>
-                </div>
-                <div class="sagorta">
-                    <p>Sui blanditiistes es praetiuptatum delenitimos atququdolores etres quamolestiasexceuri sint piditaprdentimilique suincupaqui officia deserunt mollianimid estlaborum et dolorum massafugharum quidemed rerum</p>
-
-                </div>
-                <div class="sagliste">
-                    <ul>
-                        <li> <img src="images/dot.png"/><a href="#">Sui blanditiistes es praetiuptatum delenitimos atququdolores </a></li>
-                        <li> <img src="images/dot.png"/><a href="#">Etres quamolestiasexceuri sint piditaprdentimilique suincupaqi </a></li>
-                        <li> <img src="images/dot.png"/><a href="#">Officia deserunt mollianimid estlaborum et dolorum massa  </a></li>
-                        <li> <img src="images/dot.png"/><a href="#">Fugharum quidemed rerum facilis est et expedita distinc </a></li>
-                        <li> <img src="images/dot.png"/><a href="#">Nam libero tempore, cum soluta nobis est eligendi optio cumque  </a></li>
-                    </ul>
-                </div>
-                <div>
-                    <input type="submit" class="moreButton2" value="MORE" />
-                </div>
-                <div class="clear"></div> 
-            </div>
-            <div class="clear"></div> 
-            <div class="aracizgi"></div>
-            <div class="listeResim">
-                <ul>
-                    <li><img alt="" src="images/partners1.jpg" /></li>
-                    <li><img alt="" src="images/partners2.jpg" /></li>
-                    <li><img alt="" src="images/partners3.jpg" /></li>
-                    <li><img alt="" src="images/partners4.jpg" /></li>
-                    <li><img class="eleman" alt="" src="images/partners5.jpg" /></li>
-                </ul>        
-            </div>
-            <div class="clear"></div> 
-            <div class="aracizgi2"></div>
-        </div>
-
-        <div class="footer">
             <div class="container">
-                <div class="footergif">
-                    <a href="#"> <img src="images/dentinium-logofooter.png"/> </a>
+                <div class="yazi1">
+                    <h4>a driving force in your business.</h4>
+                    <div class="yazi1alt">
+                        <h5>Lorem ipsum dolor sit amet, conEncididunt ut labore ete doloremagna aliqua. </h5>
+                    </div>
                 </div>
-                <div class="footeryazi">
-                    <small> © 2015 | </small>
+                <div class="yazi2">
+                    <div class="resim">
+                        <img src="images/img1.png"/>
+                    </div>
+                    <div class="welcome">
+                        <h3>welcome!</h3>
+                    </div>
+                    <div class="text">
+                        <h4>Our company gives you an access to the world of ideal solutions, real professionals, and unique possibilities.                     </h4>
+                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamcode laboris nisi dolore massa. Et aliquipx eato                              commodo consequataute irure dolor inreprehendolore eu fugiat nulla pariatu xcepteur sint occaecat.cupidatat                            nproident. sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </p>
+                        <p> </p>
+                    </div>    
+                </div>
+                <div class="yazi3">
+                    <div class="whatwedo">
+                        <h3>what we do</h3>
+                        <ul>
+                            <li> <a href="#">Business continuity  resiliency</a></li>
+                            <li> <a href="#">Cloud Computing</a></li>
+                            <li> <a href="#">Data center services</a>  </li>
+                            <li> <a href="#">Mobility</a></li>
+                            <li> <a href="#">Security services</a></li>
+                            <li> <a href="#">Strategy and design services</a></li>
+                            <li> <a href="#">Technical support services</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
 
-                <div class="footerlink">
-                    <small>    <a href="#"> PRIVACY POLICY</a></small>
+                <div class="clear"></div>
+
+
+                <div class="sol">
+                    <div class="soltop">
+                        <h3>news and events</h3>
+                    </div>
+                    <div class="solorta">
+                        <div class="solortaresim">
+                            <img src="images/file.png"/>
+                        </div>
+
+                        <div class="solortabaslik">
+                            <a href="#"> MAR. 19.2015.</a>
+                            <div class="solortabaslikalt">   
+                                <p>Sui blanditiistes es praetiuptatum delenitimos atququdolores etres quamolestiasexceuri sint piditaprdentimilique. </p>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+
+                        <div class="solortaresim">
+                            <img src="images/file.png"/>
+                        </div>
+
+                        <div class="solortabaslik ">
+                            <a href="#"> MAR. 19.2015.</a>
+                            <div class="solortabaslikalt">   
+                                <p>Sui blanditiistes es praetiuptatum delenitimos atququdolores etres quamolestiasexceuri sint piditaprdentimilique. </p>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="solortaresim">
+                            <img src="images/file.png"/>
+                        </div>
+
+                        <div class="solortabaslik">
+                            <a href="#"> MAR. 19.2015.</a>
+                            <div class="solortabaslikalt">   
+                                <p>Sui blanditiistes es praetiuptatum delenitimos atququdolores etres quamolestiasexceuri sint piditaprdentimilique. </p>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div>
+                        <input type="submit" class="moreButton" value="MORE" />
+                    </div>
+                    <div class="clear"></div> 
                 </div>
-                <div class="footersag">
-                    <img src="images/footerlink.png"/>
+                <div class="sag">
+                    <div class="sagtop">
+                        <h3>featured offers</h3>
+                    </div>
+                    <div class="sagorta">
+                        <p>Sui blanditiistes es praetiuptatum delenitimos atququdolores etres quamolestiasexceuri sint piditaprdentimilique suincupaqui officia deserunt mollianimid estlaborum et dolorum massafugharum quidemed rerum</p>
+
+                    </div>
+                    <div class="sagliste">
+                        <ul>
+                            <li> <img src="images/dot.png"/><a href="#">Sui blanditiistes es praetiuptatum delenitimos atququdolores </a></li>
+                            <li> <img src="images/dot.png"/><a href="#">Etres quamolestiasexceuri sint piditaprdentimilique suincupaqi </a></li>
+                            <li> <img src="images/dot.png"/><a href="#">Officia deserunt mollianimid estlaborum et dolorum massa  </a></li>
+                            <li> <img src="images/dot.png"/><a href="#">Fugharum quidemed rerum facilis est et expedita distinc </a></li>
+                            <li> <img src="images/dot.png"/><a href="#">Nam libero tempore, cum soluta nobis est eligendi optio cumque  </a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <input type="submit" class="moreButton2" value="MORE" />
+                    </div>
+                    <div class="clear"></div> 
                 </div>
+                <div class="clear"></div> 
+                <div class="aracizgi"></div>
+                <div class="listeResim">
+                    <ul>
+                        <li><img alt="" src="images/partners1.jpg" /></li>
+                        <li><img alt="" src="images/partners2.jpg" /></li>
+                        <li><img alt="" src="images/partners3.jpg" /></li>
+                        <li><img alt="" src="images/partners4.jpg" /></li>
+                        <li><img class="eleman" alt="" src="images/partners5.jpg" /></li>
+                    </ul>        
+                </div>
+                <div class="clear"></div> 
+                <div class="aracizgi2"></div>
             </div>
 
+            <div class="footer">
+                <div class="container">
+                    <div class="footergif">
+                        <a href="#"> <img src="images/dentinium-logofooter.png"/> </a>
+                    </div>
+                    <div class="footeryazi">
+                        <small> © 2015 | </small>
+                    </div>
+
+                    <div class="footerlink">
+                        <small>    <a href="#"> PRIVACY POLICY</a></small>
+                    </div>
+                    <div class="footersag">
+                        <img src="images/footerlink.png"/>
+                    </div>
+                </div>
+
+            </div>
+            <a href="#0" class="cd-top"></a>  
+
+            <script>
+
+            </script>
+
+            <script src="js/main.js"></script> 
         </div>
-        <a href="#0" class="cd-top"></a>  
-
-        <script>
-
-        </script>
-
-        <script src="js/main.js"></script> 
-</div>
     </h:body>
 
 

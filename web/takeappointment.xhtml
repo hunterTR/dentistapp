@@ -69,9 +69,8 @@
         </script>
 
         <div style = "z-index: -1">
-            <h:panelGroup rendered="#{!LoginController.isLoggedIn}" >
-                <div class="header">
-
+             <div class="header">
+                <h:panelGroup rendered="#{!LoginController.isLoggedIn}" >
                     <div class="container">
 
                         <div class="sagUst">
@@ -83,18 +82,17 @@
                             </ul>
                         </div>
                     </div>    
+                </h:panelGroup>
+                <h:outputLabel value ="Welcome:  #{LoginController.getWelcome()}" styleClass="textLogin"></h:outputLabel>
+                <h:form>
 
-                </div>
-            </h:panelGroup>
-            <h:outputLabel value ="Welcome:  #{LoginController.getWelcome()}"></h:outputLabel>
-            <h:form>
-                <h:commandButton value="login" onclick="PF('dlg').show();" rendered = "#{!LoginController.isLoggedIn}" ></h:commandButton>
-                <h:commandButton value="logout" actionListener="#{LoginController.logout}" rendered = "#{LoginController.isLoggedIn}" ></h:commandButton>
-                <h:button value="Doctor Panel" outcome="doctorpanel.xhtml" rendered ="#{LoginController.isdoctor}"></h:button>
-                <h:button value="Customer Panel" outcome="customerpanel.xhtml"></h:button>
-                <h:button value="Admin Panel" outcome="adminpanel.xhtml"  rendered ="#{LoginController.isadmin}" ></h:button>
-                <h:button value="Company Panel" outcome="companypanel.xhtml" rendered ="#{LoginController.isdoctor}" ></h:button>
-            </h:form>
+                    <h:commandButton value="logout" actionListener="#{LoginController.logout}" rendered = "#{LoginController.isLoggedIn}" ></h:commandButton>
+                    <h:button value="Doctor Panel" outcome="doctorpanel.xhtml" rendered ="#{LoginController.isdoctor}"></h:button>
+                    <h:button value="Customer Panel" outcome="customerpanel.xhtml"></h:button>
+                    <h:button value="Admin Panel" outcome="adminpanel.xhtml"  rendered ="#{LoginController.isadmin}" ></h:button>
+                    <h:button value="Company Panel" outcome="companypanel.xhtml" rendered ="#{LoginController.isdoctor}" ></h:button>
+                </h:form>
+            </div>
             <div class="headerRow">
                 <div class="logo">
                     <img src="images/dentinium-logo.png"/>
@@ -114,7 +112,7 @@
             <div class="clear"></div>
             <section class="color-4">
                 <nav class="cl-effect-6">
-                    <a href="index.html">ANASAYFA</a>
+                    <a href="index.xhtml">ANASAYFA</a>
                     <a href="#">KURUMSAL</a>
                     <a href="#">HİZMETLERİMİZ</a>
                     <a href="#">PERSONEL</a>
@@ -143,7 +141,7 @@
             <p:outputLabel for="company" value="Company " />
             <p:selectOneMenu id="company" value="#{AppointmentBean.company}" style="width:250px">
                 <p:ajax listener="#{AppointmentBean.onCompanyChange}" update="doctor" />
-                <f:selectItem itemLabel="Any Hospital" itemValue="" noSelectionOption="true" />
+                <f:selectItem itemLabel="Select Hospital" itemValue="" noSelectionOption="true" />
                 <f:selectItems value="#{AppointmentBean.companies}" />
             </p:selectOneMenu>
  

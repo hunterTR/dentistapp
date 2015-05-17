@@ -160,6 +160,8 @@ public class ReservationDataController {
 
         session.update(res);
         tran.commit();
+        
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Your have made an reservation!", ""));
     }
 
     public void deleteReservationForUser(int reservationid) {
@@ -176,6 +178,7 @@ public class ReservationDataController {
 
         session.update(res);
         tran.commit();
+           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Your reservation has been canceled!", ""));
 
     }
 
@@ -188,9 +191,11 @@ public class ReservationDataController {
             Reservations res = (Reservations) sess.load(Reservations.class, reservationid);
             sess.delete(res);
             tran.commit();
-
+   FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Deleted!", ""));
+            
         } catch (Exception ex) {
             ex.printStackTrace();
+               FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Deletion Error!", ""));
         } finally {
             sess.close();
         }

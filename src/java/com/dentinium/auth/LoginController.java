@@ -290,7 +290,7 @@ public class LoginController implements Serializable {
      * @return the isadmin
      */
     public boolean isIsadmin() {
-        return isadmin;
+        return Util.isAdmin();
     }
 
     /**

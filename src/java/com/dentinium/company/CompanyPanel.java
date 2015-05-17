@@ -14,9 +14,12 @@ import com.dentinium.hibernate.Reservations;
 import com.dentinium.hibernate.Users;
 import com.dentinium.income.IncomeDataController;
 import com.dentinium.reservation.ReservationDataController;
+import java.util.Date;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -32,9 +35,12 @@ public class CompanyPanel {
     private List<Income> incomeList;
     private List<Income> filteredIncomeList;
     private List<Doctors> doctors;
-    private List<Users> users;
+    private Reservations selectedReservation;
+  
     private List<Users> filteredUsers;
     private int reservationIncome;
+    private String registerDescription;
+    
     private String searchName = "";
     
 
@@ -42,7 +48,7 @@ public class CompanyPanel {
     ReservationDataController resdatacon = new ReservationDataController();
     IncomeDataController incomedatacon = new IncomeDataController();
     UserDataController userdatacon = new UserDataController();
-   
+     private List<Users> users = userdatacon.searchUser("");
 
     /**
      * @return the name
@@ -112,7 +118,11 @@ public class CompanyPanel {
        Reservations res = resdatacon.getReservationByID(reservationid);
        incomedatacon.createIncome(res, res.getDate(),"Patient has been treated", reservationIncome);
        resdatacon.deleteReservationForDoctor(reservationid);
-       
+    }
+    
+    public void registerIn()
+    {
+           incomedatacon.createIncome(new Date(), getRegisterDescription(), reservationIncome);
     }
 
     /**
@@ -133,7 +143,7 @@ public class CompanyPanel {
      * @return the users
      */
     public List<Users> getUsers() {
-        return userdatacon.searchUser(searchName);
+        return users;
     }
 
     /**
@@ -194,6 +204,34 @@ public class CompanyPanel {
      */
     public void setFilteredIncomeList(List<Income> filteredIncomeList) {
         this.filteredIncomeList = filteredIncomeList;
+    }
+
+    /**
+     * @return the selectedReservation
+     */
+    public Reservations getSelectedReservation() {
+        return selectedReservation;
+    }
+
+    /**
+     * @param selectedReservation the selectedReservation to set
+     */
+    public void setSelectedReservation(Reservations selectedReservation) {
+        this.selectedReservation = selectedReservation;
+    }
+
+    /**
+     * @return the registerDescription
+     */
+    public String getRegisterDescription() {
+        return registerDescription;
+    }
+
+    /**
+     * @param registerDescription the registerDescription to set
+     */
+    public void setRegisterDescription(String registerDescription) {
+        this.registerDescription = registerDescription;
     }
     
 }

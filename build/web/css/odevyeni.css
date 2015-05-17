@@ -65,3 +65,6 @@ nav {height: 50px; width: 942px;font-size: 15px; font-weight: bold;text-align: c
 .footerlink a:hover {color: #1f90ba; transition: all 0.5s ease 0s;}
 .footeryazi { color: #555454; float: left; margin: 69px 0 0 7px; font-size: 15px;}
 .footersag {float: right;margin: 53px 0 0 0px;}
+.textLogin {color: #D8E6ED; font-family: "Anton",sans-serif;}
+.textLogin h4 {text-transform: uppercase; color: #D8E6ED; font-size: 16,5px; line-height: 20px;font-family:sans-serif; font-weight:bolder; letter-spacing: -1px; padding-bottom: 20px;}
+.textLogin p {color: #D8E6ED; font-family: Arial,Helvetica,sans-serif; font-size: 13px; line-height: 18px;}

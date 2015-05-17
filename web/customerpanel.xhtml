@@ -69,9 +69,8 @@
         </script>
 
         <div style = "z-index: -1">
-            <h:panelGroup rendered="#{!LoginController.isLoggedIn}" >
-                <div class="header">
-
+             <div class="header">
+                <h:panelGroup rendered="#{!LoginController.isLoggedIn}" >
                     <div class="container">
 
                         <div class="sagUst">
@@ -83,18 +82,17 @@
                             </ul>
                         </div>
                     </div>    
+                </h:panelGroup>
+                <h:outputLabel value ="Welcome:  #{LoginController.getWelcome()}" styleClass="textLogin"></h:outputLabel>
+                <h:form>
 
-                </div>
-            </h:panelGroup>
-            <h:outputLabel value ="Welcome:  #{LoginController.getWelcome()}"></h:outputLabel>
-            <h:form>
-                <h:commandButton value="login" onclick="PF('dlg').show();" rendered = "#{!LoginController.isLoggedIn}" ></h:commandButton>
-                <h:commandButton value="logout" actionListener="#{LoginController.logout}" rendered = "#{LoginController.isLoggedIn}" ></h:commandButton>
-                <h:button value="Doctor Panel" outcome="doctorpanel.xhtml" rendered ="#{LoginController.isdoctor}"></h:button>
-                <h:button value="Customer Panel" outcome="customerpanel.xhtml"></h:button>
-                <h:button value="Admin Panel" outcome="adminpanel.xhtml"  rendered ="#{LoginController.isadmin}" ></h:button>
-                <h:button value="Company Panel" outcome="companypanel.xhtml" rendered ="#{LoginController.isdoctor}" ></h:button>
-            </h:form>
+                    <h:commandButton value="logout" actionListener="#{LoginController.logout}" rendered = "#{LoginController.isLoggedIn}" ></h:commandButton>
+                    <h:button value="Doctor Panel" outcome="doctorpanel.xhtml" rendered ="#{LoginController.isdoctor}"></h:button>
+                    <h:button value="Customer Panel" outcome="customerpanel.xhtml"></h:button>
+                    <h:button value="Admin Panel" outcome="adminpanel.xhtml"  rendered ="#{LoginController.isadmin}" ></h:button>
+                    <h:button value="Company Panel" outcome="companypanel.xhtml" rendered ="#{LoginController.isdoctor}" ></h:button>
+                </h:form>
+            </div>
             <div class="headerRow">
                 <div class="logo">
                     <img src="images/dentinium-logo.png"/>
@@ -114,7 +112,7 @@
             <div class="clear"></div>
             <section class="color-4">
                 <nav class="cl-effect-6">
-                    <a href="index.html">ANASAYFA</a>
+                    <a href="index.xhtml">ANASAYFA</a>
                     <a href="#">KURUMSAL</a>
                     <a href="#">HİZMETLERİMİZ</a>
                     <a href="#">PERSONEL</a>
@@ -123,59 +121,62 @@
                 </nav>
             </section>
             <div class="clear"></div>
-            <div id="banner-fade">
-                <ul class="bjqs">
-                    <li><img src="images/banner1.jpg" /></li>
-                    <li><img src="images/banner2.jpg" /></li>
-                    <li><img src="images/banner3.jpg"/> ></li>
-                    <li><img src="images/banner4.jpg" /></li>
-                </ul>
-            </div>
+          
             <div class="container">
 
-                    <h:form>
-    <p:growl id="msgs" showDetail="true" />
-    <p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
+                  <br />
+
+        <h:outputLabel value ="Welcome: #{CustomerPanel.name}"></h:outputLabel>
+        <br />
+     
+        <h:form id="form">
+            <p:growl id="msgs" showDetail="true" />
+
+            <p:button value="Take an Appointment"  outcome="takeappointment.xhtml" icon="ui-icon-star"  />
+
+  
+        <p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
 
         </p:dialog>
-    <p:panel header="Make an Appointment" style="margin-bottom:10px;">
-        <h:panelGrid columns="2" cellpadding="5">
-            <p:outputLabel for="company" value="Company " />
-            <p:selectOneMenu id="company" value="#{AppointmentBean.company}" style="width:250px">
-                <p:ajax listener="#{AppointmentBean.onCompanyChange}" update="doctor" />
-                <f:selectItem itemLabel="Any Hospital" itemValue="" noSelectionOption="true" />
-                <f:selectItems value="#{AppointmentBean.companies}" />
-            </p:selectOneMenu>
- 
-            <p:outputLabel for="doctor" value="Doctor: " />
-            <p:selectOneMenu id="doctor" value="#{AppointmentBean.doctor}" style="width:250px">
-                <p:ajax listener="#{AppointmentBean.onDoctorChange}" update="reservationDate" />
-                <f:selectItem itemLabel="Select Doctor" itemValue="" noSelectionOption="true" />
-                <f:selectItems value="#{AppointmentBean.doctors}" />
-            </p:selectOneMenu>
-            
-            <p:outputLabel for="treatment" value="Treatment: " />
-            <p:selectOneMenu id="treatment" value="#{AppointmentBean.treatment}" style="width:250px">
-                <f:selectItem itemLabel="Select Treatment" itemValue="" noSelectionOption="false" />
-                <f:selectItems value="#{AppointmentBean.treatments}" />
-            </p:selectOneMenu>
-            
-             <p:outputLabel for="reservationDate" value="Appointment Date: " />
-             <p:selectOneMenu id="reservationDate" value="#{AppointmentBean.reservationID}" style="width:250px">
-                <f:selectItem itemLabel="Select Date" itemValue="" noSelectionOption="false" />
-                <f:selectItems value="#{AppointmentBean.reservationDates}" />
-            </p:selectOneMenu>
-            
-            
-        </h:panelGrid>
- 
-        <p:separator />
- 
-        <p:commandButton value="Submit" update="msgs" actionListener="#{AppointmentBean.makeAppointment}" icon="ui-icon-check" />
-    </p:panel>
-</h:form>
-        
-        
+    </h:form>
+
+    <br />  
+
+    <h:form id="form2">
+
+        <p:carousel value="#{CustomerPanel.reservationsList}" headerText="Appointments" var="reservation" itemStyleClass="carItem">
+            <h:panelGrid columns="2" style="width:100%" cellpadding="5" columnClasses="label,value">
+                <f:facet name="header">
+
+                </f:facet>
+
+                <h:outputText value="Hospital" />
+                <h:outputText value="#{reservation.company.companyname}" />
+                
+                <h:outputText value="Room Number" />
+                <h:outputText value="#{reservation.room.roomname}" />
+
+                <h:outputText value="Date" />
+                <h:outputText value="#{reservation.date}" />
+
+                <h:outputText value="Doctor Name" />
+                <h:outputText value="#{reservation.doctor.getName()}"/>
+
+                <h:outputText value="Type" />
+                <h:outputText value="#Treatment A" />
+
+                <h:outputText value="Cost" />
+                <h:outputText value="100 TL" />
+
+                <h:commandButton value="Cancel" actionListener="#{CustomerPanel.deleteReservation(reservation.reservationid)}"> </h:commandButton>
+            </h:panelGrid>
+
+            <f:facet name="footer">
+
+            </f:facet>
+        </p:carousel>
+    </h:form>
+
 
 
             </div>

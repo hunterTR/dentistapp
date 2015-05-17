@@ -56,8 +56,7 @@ private CompanyDataController compdatacon = new CompanyDataController();
 
     @PostConstruct
     public void init() {
-        
-        
+       
 
         companies = new HashMap<String, String>();
         doctors = new HashMap<String,String>();

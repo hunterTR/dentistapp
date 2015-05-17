@@ -3,7 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ahmetcem/Documents/NetBeansProjects/dentapp/web/index.xhtml</file>
+            <file>file:/C:/Users/ahmetcem/Documents/NetBeansProjects/dentapp/src/java/com/dentinium/hibernate/Income.java</file>
+            <file>file:/C:/Users/ahmetcem/Documents/NetBeansProjects/dentapp/src/java/com/dentinium/income/IncomeDataController.java</file>
+            <file>file:/C:/Users/ahmetcem/Documents/NetBeansProjects/dentapp/web/companypanel.xhtml</file>
+            <file>file:/C:/Users/ahmetcem/Documents/NetBeansProjects/dentapp/src/java/com/dentinium/company/CompanyPanel.java</file>
         </group>
     </open-files>
 </project-private>
